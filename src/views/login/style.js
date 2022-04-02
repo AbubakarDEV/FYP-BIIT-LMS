@@ -1,19 +1,43 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  logoCnt: {
+const useStyles = makeStyles((theme) => ({
+  loginWrapper: {
+    background: "#d6d6d",
+    height: "100vh",
+  },
+  leftGridImg: {
+    width: "440px",
+    borderRadius: 20,
+  },
+
+  leftGrid: {
+    padding: 20,
     display: "flex",
-    justifyContent: "center",
-    marginTop: 30,
+    flexDirection: "row",
+    borderRadius: 20,
+  },
+  title: {
+    margin: "auto",
   },
   logoImg: {
-    width: "300px",
+    width: "200px",
   },
-  loginCnt: {
+
+  gridCntRight: {
+    padding: 20,
     display: "flex",
-    justifyContent: "center",
-    alignItems: "Cenetr",
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "white",
+  },
+  gridCntLeft: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#0565d8",
   },
   inputCnt: {
     display: "flex",
@@ -22,17 +46,38 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   username: {
-    width: "500px",
+    width: 350,
     marginBottom: 20,
   },
   password: {
-    width: "500px",
+    width: 350,
+    marginBottom: 20,
   },
   loginBtn: {
-    marginTop: 20,
-    width: "200px",
-    fontSize: 20,
-    color: "white",
+    width: 350,
+    "& a": {
+      color: "white",
+    },
   },
-});
+  rememberUsername: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  welcomeBack: {
+    color: "gray",
+    marginBottom: 20,
+  },
+  rightGrid: {
+    background: "white",
+    padding: 40,
+    borderRadius: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    boxShadow: "1px 1px 1px 3px rgba(0,0,0,0.1)",
+  },
+}));
 export default useStyles;

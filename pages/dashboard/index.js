@@ -1,7 +1,4 @@
-import React from "react";
-
-import Head from "next/head";
-import DashboardView from "../../src/views/Dashboard/dashboard.view";
+import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -13,34 +10,15 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Link from "next/link";
-import { Dashboard, ListAlt, Logout, Person } from "@mui/icons-material";
-
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import sideDrawerStyles from "./drawer.style";
+import { useRouter } from "next/router";
+import CloseIcon from "@mui/icons-material/Close";
+import CustomIconButton from "../../src/common/icons//IconButton/IconButton.cmp";
 const drawerWidth = 240;
-
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(2),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -59,19 +37,10 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
-
-export default function Login() {
-  const theme = useTheme();
+export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
-
+  const classes = sideDrawerStyles();
+  const router = useRouter();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -79,92 +48,78 @@ export default function Login() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  //Handle Item Click
+  const handleItemClick = (e, path) => {
+    router.push(path);
+  };
+
+  const Item = ({ children, text, path }) => {
+    return (
+      <ListItem
+        button
+        className={classes.listItem}
+        onClick={(e) => handleItemClick(e, path)}
+      >
+        <ListItemIcon className={classes.listItemIcon}>{children}</ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItem>
+    );
+  };
   return (
-    <>
-      <Head>
-        <title>BIIT LMS</title>
-      </Head>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              BIIT LMS
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
+    <Box sx={{ display: "flex" }}>
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Persistent drawer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
+            boxSizing: "border-box",
+          },
+        }}
+        // variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <CustomIconButton
+          style={{
+            padding: "5px 15px",
+            borderRadius: 0,
+            height: 44,
+            // background: theme.palette.background.lightGray1,
           }}
-          variant="persistent"
-          anchor="left"
-          open={open}
+          onClick={handleDrawerClose}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <Dashboard />
-              </ListItemIcon>
-              <Link href={"/dashboard"}>
-                <ListItemText primary={"Dashboard"} />
-              </Link>
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <ListAlt />
-              </ListItemIcon>
-              <Link href={"/course"}>
-                <ListItemText primary={"Courses"} />
-              </Link>
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <Link href={"/profile"}>
-                <ListItemText primary={"Profile"} />
-              </Link>
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <Logout />
-              </ListItemIcon>
-              <Link href={"/login"}>
-                <ListItemText primary={"Logout"} />
-              </Link>
-            </ListItem>
-          </List>
-        </Drawer>
-        <Main open={open}>
-          <DrawerHeader />
-          <DashboardView />
-        </Main>
-      </Box>
-    </>
+          <CloseIcon className={classes.closeIcon} />
+        </CustomIconButton>
+        <Item text="Dashboard" path="/dashboard">
+          <img src="./images/dashboard.png" style={{ width: 25 }} />
+        </Item>
+        <Item text="Courses" path="/course">
+          <img src="./images/folder.png" style={{ width: 25 }} />
+        </Item>
+        <Item text="Profile" path="/profile">
+          <img src="./images/profile.png" style={{ width: 25 }} />
+        </Item>
+        <Item text="Weeks" path="/weeks">
+          <img src="./images/weeks.png" style={{ width: 25 }} />
+        </Item>
+      </Drawer>
+    </Box>
   );
 }
