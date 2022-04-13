@@ -37,14 +37,7 @@ body {
 ol, ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -52,27 +45,6 @@ table {
 text{
 	font-family: 'Open Sans', 'sans-serif' !important
 }
-b{
-	font-weight: 600 !important
-}
-
-.grecaptcha-badge {
-	z-index: -1
-}
-.MuiSkeleton-root{
-	border-radius: 4px;
-}
-.MuiTreeItem-group{
-	transition: none !important
-}
-
-/* path {
-	pointer-events: all;
-  } */
-/* path:hover {
-	opacity: 0.50;
-	cursor: pointer;
-} */
 
 
 .loader {

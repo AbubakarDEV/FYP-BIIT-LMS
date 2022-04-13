@@ -1,10 +1,10 @@
 import { createTheme } from "@mui/material/styles";
-// import createBreakpoints from "@mui/material/styles/createBreakpoints";
-
 import palette from "./palette";
 import colors from "../styles/colors.json";
 
-// const breakpoints = createBreakpoints({});
+import { createBreakpoints } from "@mui/system";
+
+const breakpoints = createBreakpoints({});
 
 const { gray, primary, common, red, green, yellow, orange, antiquewhite } =
   palette;
@@ -20,9 +20,9 @@ const theme = createTheme({
       marginBottom: 10,
       color: gray[600],
       fontFamily: "'Roboto', 'sans-serif'",
-      //   [breakpoints.down("xs")]: {
-      //     fontSize: 35,
-      //   },
+      [breakpoints.down("xs")]: {
+        fontSize: 35,
+      },
     },
     h2: {
       fontSize: 44,
@@ -32,21 +32,21 @@ const theme = createTheme({
       marginBottom: 10,
       color: gray[600],
       fontFamily: "'Roboto', 'sans-serif'",
-      //   [breakpoints.down("xs")]: {
-      //     fontSize: 30,
-      //   },
+      [breakpoints.down("xs")]: {
+        fontSize: 30,
+      },
     },
     h3: {
-      fontSize: 26,
+      fontSize: 36,
       fontWeight: 500,
       lineHeight: 1.25,
       letterSpacing: "-0.01562em",
       marginBottom: 10,
       color: gray[800],
       fontFamily: "'Roboto', 'sans-serif'",
-      //   [breakpoints.down("xs")]: {
-      //     fontSize: 22,
-      //   },
+      [breakpoints.down("lg")]: {
+        fontSize: 22,
+      },
     },
     h4: {
       fontSize: 18,

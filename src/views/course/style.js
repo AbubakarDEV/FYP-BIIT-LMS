@@ -1,45 +1,40 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  dueDateCnt: {
-    display: "flex",
-    alignItems: "center",
-  },
-  submissionBtn: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-  },
-  assignmnetLogo: {
-    width: "50px",
-  },
-  assignmnetCnt: {
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-  heading: {
-    backgroundColor: "#929eaa",
-    padding: 10,
-  },
+const useStyles = makeStyles((theme) => {
+  return {
+    gridContainer: {
+      padding: theme.spacing(10, 10),
+    },
+    courseCnt: {
+      height: "100vh",
+    },
 
-  recentinnerCnt: {
-    height: "180px",
-    width: "320px",
-    border: "1px solid black",
-    position: "relative",
-  },
-  recentImg: {
-    width: "100%",
-    height: "100px",
-  },
-  recentContentCnt: {
-    padding: 12,
-  },
+    cardContent: {
+      position: "relative",
+    },
+    cardsCnt: {
+      display: "flex",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+    },
+    cardDate: {
+      color: theme.palette.typography.blue,
+    },
+    cardTitle: {
+      color: theme.palette.typography.darkGray,
+    },
+    recentCoursesCard: {
+      display: "flex",
+      flexDirection: "column",
+      background: theme.palette.background.lightGray1,
+      margin: "0px 0px 50px 0px",
+    },
 
-  dashboardinnerCnt: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
+    title: {
+      color: theme.palette.typography.darkOrange,
+      background: theme.palette.background.antiwhite,
+      padding: 10,
+    },
+  };
 });
 export default useStyles;

@@ -10,7 +10,7 @@ const palette = {
   },
   primary: {
     mediumLight: "#1fbdef",
-    medium: "#43b4e7",
+    medium: "#00a2e8",
     dark: "#0565d8",
     light: "#3d15de",
     extraLight: "#fafafc",

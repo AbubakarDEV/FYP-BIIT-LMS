@@ -1,61 +1,63 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  dashboardCnt: {
-    // margin: "0px 100px",
-    // marginTop: 20,
-    marginBottom: 40,
-  },
-  dashboardinnerCnt: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  heading: {
-    backgroundColor: "#929eaa",
-    padding: 10,
-  },
-  timelineCnt: {
-    height: "120px",
-    width: "300px",
-    border: "1px solid black",
-    position: "relative",
-    padding: 15,
-  },
+const useStyles = makeStyles((theme) => {
+  return {
+    recentCourses: {
+      height: 150,
+      width: 300,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+    },
+    recentCoursesCard: {
+      display: "flex",
+      flexDirection: "row",
+    },
 
-  dueDateCnt: {
-    display: "flex",
-    alignItems: "center",
-  },
-  submissionBtn: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-  },
-  assignmnetLogo: {
-    width: "50px",
-  },
-  assignmnetCnt: {
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
+    gridContainer: {
+      padding: theme.spacing(10, 15),
+    },
+    submitBtn: {
+      position: "absolute",
+      right: 8,
+      bottom: 5,
+      fontSize: 20,
+      fontWeight: 700,
+      color: theme.palette.typography.blueMedium,
+    },
+    cardContent: {
+      position: "relative",
+    },
+    cardsCnt: {
+      display: "flex",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+    },
+    cardDate: {
+      color: theme.palette.typography.blue,
+    },
+    cardTitle: {
+      color: theme.palette.typography.darkGray,
+    },
+    recentCoursesCard: {
+      display: "flex",
+      flexDirection: "column",
+      background: theme.palette.background.lightGray1,
+      margin: "0px 0px 50px 0px",
+    },
 
-  recentCnt: {
-    marginTop: 50,
-  },
-  recentinnerCnt: {
-    height: "180px",
-    width: "320px",
-    border: "1px solid black",
-    position: "relative",
-    // marginTop: 10,
-  },
-  recentImg: {
-    width: "100%",
-    height: "100px",
-  },
-  recentContentCnt: {
-    padding: 12,
-  },
+    timeline: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+    },
+    title: {
+      color: theme.palette.typography.darkOrange,
+      background: theme.palette.background.antiwhite,
+      padding: 10,
+    },
+  };
 });
 export default useStyles;

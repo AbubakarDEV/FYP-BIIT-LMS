@@ -1,37 +1,121 @@
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  logoCnt: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: 30,
+  profileCnt: {
+    marginTop: 70,
+    marginLeft: 200,
+    marginRight: 200,
   },
-  logoImg: {
-    width: "300px",
+  gridContainer: {
+    padding: "20px 0px",
   },
-  loginCnt: {
+
+  galleryImgCnt: {
+    position: "relative",
+  },
+  galleryImg: {
+    Width: 150,
+    height: 150,
+  },
+  editIcon: {
+    position: "absolute",
+    bottom: -50,
+    left: 70,
+    fontSize: 16,
+    fontWeight: 600,
+    padding: 10,
+    cursor: "pointer",
+    color: "gray",
+    background: "#d3d3d359",
+  },
+  uploadImageContainer: {
+    border: "1px solid blue",
+    borderStyle: "dashed",
+    minHeight: "150px",
+    height: "100%",
+    width: "250px",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "Cenetr",
     flexDirection: "column",
-  },
-  inputCnt: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "ease all 0.2s",
+    "&:hover": {
+      background: "blue",
+      transition: "ease all 0.2s",
+    },
+    "&:hover h4": {
+      color: "white",
+      transition: "ease all 0.3s",
+    },
+    "&:hover svg": {
+      color: "white",
+      transition: "ease all 0.3s",
+    },
   },
-  username: {
-    width: "500px",
-    marginBottom: 20,
+  uploadProgress: {
+    width: "100px",
+    marginBottom: 5,
   },
-  password: {
-    width: "500px",
+  uploadImageGridItem: {
+    width: 180,
+    height: 180,
+    border: "1px solid blue",
+    borderStyle: "dotted",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "ease all 0.2s",
+    background: "white",
+    boxShadow:
+      "0px -1px 5px 1px rgb(0 0 0 / 5%), 0px 1px 1px 0px rgb(0 0 0 / 5%), 0px 1px 3px 0px rgb(0 0 0 / 5%)",
+    "&:hover": {
+      background: "blue",
+      transition: "ease all 0.2s",
+    },
+    "&:hover h4": {
+      color: "white",
+      transition: "ease all 0.3s",
+    },
+    "&:hover svg": {
+      color: "white",
+      transition: "ease all 0.3s",
+    },
   },
-  loginBtn: {
-    marginTop: 20,
-    width: "200px",
-    fontSize: 20,
+  uploadIcon: {
+    fontSize: 48,
+    color: "blue",
+  },
+
+  textfieldGrid: {
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  },
+  emailTextfield: {
+    marginBottom: 10,
+    width: 300,
+    background: "#d3d3d359",
+  },
+  changePassword: {
+    margin: "20px 0px",
+  },
+  passwordBtn: {
+    width: 200,
+    position: "absolute",
+    right: 0,
+    top: 10,
+  },
+  profileBtn: {
+    width: 200,
+    position: "absolute",
+    right: 0,
+  },
+  caption: {
+    letterSpacing: 1,
+    width: 500,
   },
 });
 export default useStyles;

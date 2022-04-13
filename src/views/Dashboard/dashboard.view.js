@@ -1,185 +1,157 @@
 import React from "react";
 import useStyles from "./style";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
-import Button from "@mui/material/Button";
 import Footer from "../../common/components/footer/footer.cmt";
+import { Grid } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 
-export default function LoginView() {
+export default function DashboardView() {
   const classes = useStyles();
+  const [progress, setProgress] = React.useState(10);
+  const Cards = ({
+    cardImage,
+    Date,
+    Title,
+    isAssignment,
+    AssignmentTitle,
+    Assignment,
+    cardWidth,
+  }) => {
+    return (
+      <Card sx={{ width: cardWidth }} className={classes.recentCoursesCard}>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/images/cardimg3.jpg"
+          alt="green iguana"
+        />
+        <CardContent className={classes.cardContent}>
+          {isAssignment ? (
+            <>
+              <Typography
+                className={classes.cardDate}
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
+                {Assignment}
+              </Typography>
+              <Typography
+                className={classes.cardTitle}
+                variant="h4"
+                color="text.secondary"
+              >
+                {AssignmentTitle}
+              </Typography>
+              <Typography
+                className={classes.submitBtn}
+                variant="body1"
+                color="text.secondary"
+              >
+                Submit
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Typography
+                className={classes.cardDate}
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
+                {Date}
+              </Typography>
+              <Typography
+                className={classes.cardTitle}
+                variant="h4"
+                color="text.secondary"
+              >
+                {Title}
+              </Typography>
+              <LinearProgress
+                variant="buffer"
+                value={progress}
+                style={{ marginTop: 10 }}
+              />
+            </>
+          )}
+        </CardContent>
+      </Card>
+    );
+  };
   return (
     <>
       <div className={classes.dashboardCnt}>
-        <div>
-          <Typography variant="h3" className={classes.heading}>
-            Timeline
-          </Typography>
-
-          <div className={classes.dashboardinnerCnt}>
-            <div className={classes.timelineCnt}>
-              <div className={classes.dueDateCnt}>
-                <Typography variant="h6">Due Date:</Typography>
-                <Typography variant="body2">Febuary 20, 2022</Typography>
-              </div>
-              <div className={classes.assignmnetCnt}>
-                <img
-                  src="./images/assignment.png"
-                  className={classes.assignmnetLogo}
-                />
-                <Typography variant="body1">
-                  Parallel Distributed Computting
-                </Typography>
-              </div>
-              <Button variant="text" className={classes.submissionBtn}>
-                <Link href={"./login"}>Add Submission</Link>
-              </Button>
+        <Grid container spacing={5} className={classes.gridContainer}>
+          <Grid item xs={8} lg={8} md={8} className={classes.leftGrid}>
+            <Typography variant="h3" className={classes.title}>
+              Recently accessed courses
+            </Typography>
+            {/* <Divider /> */}
+            <div className={classes.cardsCnt}>
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="COMMUNICATION SKILLS"
+              />
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="Web Enginnering"
+              />
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="Artificial Inteligrnce"
+              />
             </div>
-            <div className={classes.timelineCnt}>
-              <div className={classes.dueDateCnt}>
-                <Typography variant="h6">Due Date:</Typography>
-                <Typography variant="body2">Febuary 20, 2022</Typography>
-              </div>
-              <div className={classes.assignmnetCnt}>
-                <img
-                  src="./images/assignment.png"
-                  className={classes.assignmnetLogo}
-                />
-                <Typography variant="body1">
-                  Parallel Distributed Computting
-                </Typography>
-              </div>
-              <Button variant="text" className={classes.submissionBtn}>
-                <Link href={"./login"}>Add Submission</Link>
-              </Button>
+            <Typography variant="h3" className={classes.title}>
+              Course overview
+            </Typography>
+            {/* <Divider></Divider> */}
+            <div className={classes.cardsCnt}>
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="Programming Fundamentals"
+              />
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="Object Oriented Programming"
+              />
+              <Cards
+                cardWidth={240}
+                Date="SPRING-22 CS-2022S"
+                Title="COMMUNICATION SKILLS"
+              />
             </div>
-            <div className={classes.timelineCnt}>
-              <div className={classes.dueDateCnt}>
-                <Typography variant="h6">Due Date:</Typography>
-                <Typography variant="body2">Febuary 20, 2022</Typography>
-              </div>
-              <div className={classes.assignmnetCnt}>
-                <img
-                  src="./images/assignment.png"
-                  className={classes.assignmnetLogo}
-                />
-                <Typography variant="body1">
-                  Parallel Distributed Computting
-                </Typography>
-              </div>
-              <Button variant="text" className={classes.submissionBtn}>
-                <Link href={"./login"}>Add Submission</Link>
-              </Button>
+          </Grid>
+
+          <Grid item xs={4} lg={4} md={4} className={classes.rightGrid}>
+            <Typography variant="h3" className={classes.title}>
+              Timeline
+            </Typography>
+            {/* <Divider></Divider> */}
+            <div className={classes.timeline}>
+              <Cards
+                cardWidth={350}
+                isAssignment
+                AssignmentTitle="COMMUNICATION SKILLS"
+                Assignment="Assignment # 1"
+              />
+              <Cards
+                cardWidth={350}
+                isAssignment
+                AssignmentTitle="Visual Programming"
+                Assignment="Assignment # 2"
+              />
             </div>
-          </div>
-        </div>
-        <div className={classes.recentCnt}>
-          <Typography variant="h3" className={classes.heading}>
-            Recently accessed courses
-          </Typography>
-
-          <div className={classes.dashboardinnerCnt}>
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | CC-2021F</Typography>
-                  <Typography variant="h6">Compiler Construction</Typography>
-                </div>
-              </div>
-            </Link>
-
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | IS-2021F</Typography>
-                  <Typography variant="h6">Information Security</Typography>
-                </div>
-              </div>
-            </Link>
-
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | PDC-2021F</Typography>
-                  <Typography variant="h6">
-                    Parallel Distributed Computting
-                  </Typography>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        <div className={classes.recentCnt}>
-          <Typography variant="h3" className={classes.heading}>
-            Enrolled Courses
-          </Typography>
-
-          <div className={classes.dashboardinnerCnt}>
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | CC-2021F</Typography>
-                  <Typography variant="h6">Compiler Construction</Typography>
-                </div>
-              </div>
-            </Link>
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | IS-2021F</Typography>
-                  <Typography variant="h6">Information Security</Typography>
-                </div>
-              </div>
-            </Link>
-            <Link href={"/weeks"}>
-              <div className={classes.recentinnerCnt}>
-                <div>
-                  <img
-                    className={classes.recentImg}
-                    src="./images/recentCourses.jpg"
-                  />
-                </div>
-                <div className={classes.recentContentCnt}>
-                  <Typography variant="body1">FALL-2021 | PDC-2021F</Typography>
-                  <Typography variant="h6">
-                    Parallel Distributed Computting
-                  </Typography>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </div>
       <Footer />
     </>
