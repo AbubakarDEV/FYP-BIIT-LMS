@@ -7,11 +7,8 @@ import {
   Marker,
 } from "react-google-maps";
 
-import { mapUrl } from "./config";
-console.log(mapUrl);
-
 const mapProps = {
-  googleMapURL: mapUrl,
+  googleMapURL: "xsaas",
   loadingElement: <div style={{ height: `100%` }} />,
   containerElement: <div style={{ height: `400px` }} />,
   mapElement: <div style={{ height: `100%` }} />,
