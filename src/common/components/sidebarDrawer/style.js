@@ -60,6 +60,19 @@ const sideDrawerStyles = makeStyles((theme) => ({
     padding: 4,
     cursor: "pointer",
   },
+  appBarCnt: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    alignItems: "center",
+  },
+  username: {
+    marginRight: 10,
+    color: "white",
+    fontSize: 16,
+    fontWeight: 600,
+    letterSpacing: 1,
+  },
 }));
 
 export default sideDrawerStyles;

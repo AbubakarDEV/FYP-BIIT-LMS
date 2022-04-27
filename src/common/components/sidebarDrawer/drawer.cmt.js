@@ -14,7 +14,7 @@ import sideDrawerStyles from "./style";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomIconButton from "../../icons/IconButton/IconButton.cmp";
-
+import Avatar from "@mui/material/Avatar";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -75,9 +75,17 @@ export default function SideDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            BIIT LMS
-          </Typography>
+          <div className={classes.appBarCnt}>
+            <Typography variant="h6" noWrap component="div">
+              BIIT LMS
+            </Typography>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Typography variant="body1" className={classes.username}>
+                Admin
+              </Typography>
+              <Avatar alt="Remy Sharp" src="/images/user.png" />
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -114,6 +122,9 @@ export default function SideDrawer() {
         </Item>
         <Item text="Profile" path="/dashboard/profile">
           <img src="/images/profile.png" style={{ width: 25 }} />
+        </Item>
+        <Item text="Logout" path="/login">
+          <img src="/images/logout.png" style={{ width: 25 }} />
         </Item>
       </Drawer>
     </Box>

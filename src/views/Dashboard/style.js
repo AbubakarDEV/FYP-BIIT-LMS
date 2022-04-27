@@ -16,7 +16,14 @@ const useStyles = makeStyles((theme) => {
     },
 
     gridContainer: {
-      padding: theme.spacing(10, 15),
+      padding: theme.spacing(10, 1),
+
+      [theme.breakpoints.down("sm")]: {
+        padding: theme.spacing(8, 0),
+      },
+      [theme.breakpoints.only("md")]: {
+        padding: theme.spacing(10, 1),
+      },
     },
     submitBtn: {
       position: "absolute",
@@ -33,6 +40,9 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       justifyContent: "space-between",
       flexWrap: "wrap",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: "center",
+      },
     },
     cardDate: {
       color: theme.palette.typography.blue,
@@ -41,6 +51,7 @@ const useStyles = makeStyles((theme) => {
       color: theme.palette.typography.darkGray,
     },
     recentCoursesCard: {
+      cursor: "pointer",
       display: "flex",
       flexDirection: "column",
       background: theme.palette.background.lightGray1,
@@ -52,6 +63,13 @@ const useStyles = makeStyles((theme) => {
       alignItems: "center",
       justifyContent: "center",
       flexDirection: "column",
+      [theme.breakpoints.only("md")]: {
+        flexDirection: "unset",
+        flexWrap: "wrap",
+      },
+      [theme.breakpoints.down("sm")]: {
+        margin: "10px 10px",
+      },
     },
     title: {
       color: theme.palette.typography.darkOrange,

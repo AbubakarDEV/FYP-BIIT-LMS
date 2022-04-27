@@ -1,8 +1,6 @@
 import React from "react";
 import useStyles from "./style";
 import Typography from "@mui/material/Typography";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 
 export default function Footer() {
   const classes = useStyles();

@@ -3,10 +3,27 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     gridContainer: {
-      padding: theme.spacing(10, 10),
+      padding: theme.spacing(10, 5),
+      [theme.breakpoints.down("sm")]: {
+        padding: theme.spacing(8, 0),
+      },
+      [theme.breakpoints.only("md")]: {
+        padding: theme.spacing(10, 1),
+      },
+      [theme.breakpoints.only("lg")]: {
+        padding: theme.spacing(10, 5),
+      },
     },
     courseCnt: {
-      height: "100vh",
+      [theme.breakpoints.only("xl")]: {
+        height: "100vh",
+      },
+      [theme.breakpoints.only("lg")]: {
+        height: "100vh",
+      },
+      [theme.breakpoints.only("md")]: {
+        height: "100vh",
+      },
     },
 
     cardContent: {
@@ -16,6 +33,9 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       justifyContent: "space-between",
       flexWrap: "wrap",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: "center",
+      },
     },
     cardDate: {
       color: theme.palette.typography.blue,

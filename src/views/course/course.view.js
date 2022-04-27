@@ -88,7 +88,7 @@ export default function DashboardView() {
         <Grid container className={classes.gridContainer}>
           <Grid item xs={12} className={classes.leftGrid}>
             <Typography variant="h3" className={classes.title}>
-              Enrolled courses
+              <img src="/images/book.png" width={"40px"} /> Enrolled courses
             </Typography>
             <div className={classes.cardsCnt}>
               <Cards
