@@ -5,3 +5,6 @@ export const initialState = {
 export const userInfoState = {
   role: "",
 };
+export const courseInitialState = {
+  isLoading: true,
+};

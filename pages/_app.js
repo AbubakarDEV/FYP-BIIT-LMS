@@ -5,9 +5,13 @@ import "./app.css";
 import {
   userInfoState,
   initialState,
+  courseInitialState,
 } from "../src/common/context/initialState";
 import { userInfoReducer } from "../src/common/context/reducer/userInfo";
-import { profileReducer } from "../src/common/context/reducer/auth";
+import {
+  profileReducer,
+  coursesReducer,
+} from "../src/common/context/reducer/auth";
 import Context from "../src/common/context/context";
 import "bootstrap/dist/css/bootstrap.css";
 import Spinner from "react-bootstrap/Spinner";
@@ -27,6 +31,10 @@ function MyApp({ Component, pageProps }) {
     userInfoState
   );
   const [profile, dispatch] = React.useReducer(profileReducer, initialState);
+  const [courses, dispatchCourses] = React.useReducer(
+    coursesReducer,
+    courseInitialState
+  );
 
   return (
     <>
@@ -36,6 +44,8 @@ function MyApp({ Component, pageProps }) {
           dispatch,
           userInfo,
           dispatchUserInfo,
+          courses,
+          dispatchCourses,
         }}
       >
         <ThemeProvider theme={theme}>

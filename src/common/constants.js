@@ -3,6 +3,12 @@ export const WEB_BASE_URL = process.env.NEXT_PUBLIC_WEB_URL;
 export const SERVICE_NAME = "moodle_mobile_app";
 export const MOODLEFORMAT = "json";
 export const GETENROLLEDUSER = "core_enrol_get_enrolled_users";
+export const GETPROFILE = "core_user_get_users_by_field";
+export const GETALLCOURSES = "core_course_get_courses";
+export const COURSECONTENT = "core_course_get_contents";
+export const GETASSIGNMNET = "mod_assign_get_assignments";
+export const GETENROLLEDCOURSES = "core_enrol_get_users_courses";
+
 export const TIMEOUT_VALUE = 60000;
 
 export function getErrors(err) {

@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => {
     },
     heading: {
       margin: 0,
+      fontSize: 30,
+      marginBottom: 20,
       [theme.breakpoints.down("sm")]: {
         fontSize: 20,
       },

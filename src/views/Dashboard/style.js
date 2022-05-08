@@ -2,6 +2,22 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => {
   return {
+    dashboardCnt: {
+      height: "100%",
+      padding: theme.spacing(10, 1),
+
+      [theme.breakpoints.down("sm")]: {
+        padding: theme.spacing(8, 0),
+      },
+      [theme.breakpoints.only("md")]: {
+        padding: theme.spacing(10, 1),
+      },
+    },
+    leftGrid: {
+      justifyContent: "center",
+      alignItems: "center",
+      display: "flex",
+    },
     recentCourses: {
       height: 150,
       width: 300,
@@ -13,17 +29,21 @@ const useStyles = makeStyles((theme) => {
     recentCoursesCard: {
       display: "flex",
       flexDirection: "row",
+      // padding: 100,
     },
-
+    cardDate: {
+      fontSize: 16,
+      color: theme.palette.typography.darkGray,
+      // color: "red !important",
+    },
     gridContainer: {
-      padding: theme.spacing(10, 1),
-
-      [theme.breakpoints.down("sm")]: {
-        padding: theme.spacing(8, 0),
-      },
-      [theme.breakpoints.only("md")]: {
-        padding: theme.spacing(10, 1),
-      },
+      // padding: theme.spacing(10, 1),
+      // [theme.breakpoints.down("sm")]: {
+      //   padding: theme.spacing(8, 0),
+      // },
+      // [theme.breakpoints.only("md")]: {
+      //   padding: theme.spacing(10, 1),
+      // },
     },
     submitBtn: {
       position: "absolute",
@@ -37,14 +57,14 @@ const useStyles = makeStyles((theme) => {
       position: "relative",
     },
     cardsCnt: {
-      display: "flex",
-      justifyContent: "space-between",
-      flexWrap: "wrap",
+      // display: "flex",
+      // justifyContent: "space-between",
+      // flexWrap: "wrap",
       [theme.breakpoints.down("sm")]: {
         justifyContent: "center",
       },
     },
-    cardDate: {
+    cardData: {
       color: theme.palette.typography.blue,
     },
     cardTitle: {

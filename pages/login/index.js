@@ -9,7 +9,7 @@ export default function Login() {
       <Head>
         <title>BIIT LMS</title>
       </Head>
-      <MyMapComponent />
+      <LoginView />
     </>
   );
 }

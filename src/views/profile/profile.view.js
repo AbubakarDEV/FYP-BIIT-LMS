@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import useStyles from "./style";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -10,12 +10,16 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Divider from "@mui/material/Divider";
 import Spinner from "react-bootstrap/Spinner";
 import Footer from "../../common/components/footer/footer.cmt";
+import Context from "../../common/context/context";
 
 export default function ProfileView() {
   const classes = useStyles();
   const [image, setImage] = useState("/images/book.png");
   const [isImgLoading, setIsImgLoading] = useState(false);
   const [isLoadingg, setIsLoading] = useState(false);
+
+  const ContextConsumer = useContext(Context);
+  const { profile } = ContextConsumer;
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
@@ -61,7 +65,9 @@ export default function ProfileView() {
                   {!isImgLoading ? (
                     <div className={classes.galleryImgCnt}>
                       <img
-                        src={"/images/logoimg.jpg"}
+                        src={
+                          profile?.profileimageurlsmall || "/images/logoimg.jpg"
+                        }
                         alt="galleryImg"
                         className={classes.galleryImg}
                         onError={(e) => {
@@ -120,20 +126,20 @@ export default function ProfileView() {
               id="outlined-required"
               placeholder="Email"
               label="Email"
-              defaultValue="2018-arid-0955"
+              defaultValue={profile?.email}
             />
             <TextField
               className={classes.emailTextfield}
               id="outlined-required"
               label="Username"
-              defaultValue="Abubakar Jilani"
+              defaultValue={profile?.username}
             />
             <TextField
               className={classes.emailTextfield}
               label="Country"
               defaultValue="Pakistan"
             />
-            <TextField
+            {/* <TextField
               className={classes.emailTextfield}
               label="City/Town"
               defaultValue="Rawalpindi"
@@ -142,7 +148,7 @@ export default function ProfileView() {
               className={classes.emailTextfield}
               label="Phone"
               defaultValue="0317 5867877"
-            />
+            /> */}
             <Button variant="contained" className={classes.profileBtn}>
               Update Profile
             </Button>

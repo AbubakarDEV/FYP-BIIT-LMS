@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStyles from "./style";
 import Typography from "@mui/material/Typography";
-import { Divider } from "@mui/material";
 import Footer from "../../common/components/footer/footer.cmt";
+import CustomAccordian from "../../common/components/accordian/Accordian";
 
-export default function WeekView() {
+export default function WeekView(props) {
   const classes = useStyles();
-  const Weeks = ({ weekNo, startDate, endDate }) => {
+  const { courseContent, courseName } = props;
+  const [courseContentData, setCourseContent] = React.useState(courseContent);
+  useEffect(() => {
+    setCourseContent(courseContent);
+  }, []);
+
+  const Weeks = ({ weekNo, Date }) => {
     return (
       <div className={classes.weekCnt}>
         <img src="/images/folder.png" className={classes.folderImg} />
         <Typography variant="h3" className={classes.heading}>
-          Week {weekNo} ({startDate} - {endDate})
+          Week {weekNo} ({Date})
         </Typography>
       </div>
     );
@@ -21,25 +27,77 @@ export default function WeekView() {
     <>
       <div className={classes.weeksContainer}>
         <Typography variant="h2" className={classes.heading}>
-          INFORMATION SECURITY
+          {courseName}
         </Typography>
-        <Weeks weekNo="1" startDate="1 April" endDate="7 April" />
-        <Weeks weekNo="2" startDate="8 April" endDate="15 April" />
-        <Weeks weekNo="3" startDate="16 April" endDate="23 April" />
-        <Weeks weekNo="4" startDate="24 April" endDate="30 April" />
-        <Weeks weekNo="5" startDate="1 May" endDate="7 May" />
-        <Weeks weekNo="6" startDate="8 May" endDate="15 May" />
-        <Weeks weekNo="7" startDate="16 May" endDate="23 May" />
-        <Weeks weekNo="8" startDate="24 May" endDate="30 May" />
+        {/* <Divider /> */}
+        {/* {courseContentData?.map((item) => (
+          <Weeks weekNo={item.section} Date={item.name} />
+        ))} */}
+        {courseContentData?.map((item) => (
+          <CustomAccordian
+            titleElement={item.section}
+            date={item.name}
+            style={{ boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.15)" }}
+            ContentStyles={{ style: { overflowY: "hidden" } }}
+            content={
+              <div className={classes.optionsCnt}>
+                <a
+                  href={item?.modules[0]?.url}
+                  style={{ textDecoration: "none" }}
+                  target="_blank"
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: 20,
+                    }}
+                  >
+                    <img
+                      src={item?.modules[0]?.modicon}
+                      style={{ width: 20, height: 20, marginRight: 10 }}
+                    />
+                    <Typography
+                      variant="h4"
+                      style={{ margin: 0, color: "gray", fontSize: 20 }}
+                    >
+                      {item?.modules[0]?.name}
+                    </Typography>
+                  </div>
+                </a>
+                <a
+                  href={item?.modules[1]?.contents[0]?.fileurl}
+                  target="_blank"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: 20,
+                    }}
+                  >
+                    <img
+                      src={item?.modules[1]?.modicon}
+                      style={{ width: 20, height: 20, marginRight: 10 }}
+                    />
 
-        <Typography align="center" variant="h3" className={classes.mid}>
-          Mid Term
-        </Typography>
-        <Weeks weekNo="9" startDate="24 May" endDate="30 May" />
-
-        <Weeks weekNo="10" startDate="24 May" endDate="30 May" />
-
-        <Weeks weekNo="11" startDate="24 May" endDate="30 May" />
+                    <Typography
+                      variant="h4"
+                      style={{
+                        margin: 0,
+                        fontSize: 20,
+                        color: "gray",
+                      }}
+                    >
+                      {item?.modules[1]?.name}
+                    </Typography>
+                  </div>
+                </a>
+              </div>
+            }
+          />
+        ))}
       </div>
       <Footer />
     </>

@@ -23,20 +23,20 @@ Axios.interceptors.response.use((response) => {
 });
 
 // Axios Instance
-// export const authAxios = (
-//   access_token,
-//   not_local_store,
-//   customHeaders = {}
-// ) => {
-//   let token = "";
-//   if (not_local_store) {
-//     token = access_token;
-//   } else {
-//     token = Cookies.get("access_token");
-//   }
-//   return axios.create({
-//     baseURL: BASE_URL,
-//     headers: { ...headers, Authorization: token, ...customHeaders },
-//     defaults: { timeout: TIMEOUT_VALUE },
-//   });
-// };
+export const authAxios = (
+  access_token,
+  not_local_store,
+  customHeaders = {}
+) => {
+  let token = "";
+  if (not_local_store) {
+    token = access_token;
+  } else {
+    token = Cookies.get("access_token");
+  }
+  return axios.create({
+    baseURL: BASE_URL,
+    headers: { ...headers, wstoken: token, ...customHeaders },
+    defaults: { timeout: TIMEOUT_VALUE },
+  });
+};

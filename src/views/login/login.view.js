@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
@@ -7,7 +7,12 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { Hidden, Paper } from "@mui/material";
 import { userLogin } from "../../common/actions/auth";
-import { getErrors, MOODLEFORMAT, SERVICE_NAME } from "../../common/constants";
+import {
+  getErrors,
+  GETPROFILE,
+  MOODLEFORMAT,
+  SERVICE_NAME,
+} from "../../common/constants";
 import { useTheme } from "@mui/material/styles";
 import schema from "./loginValidation";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -16,6 +21,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
 import stylesObj from "./style";
+import Cookies from "js-cookie";
+import { getProfile } from "../../common/actions/dashboard";
+import Context from "../../common/context/context";
 
 export default function LoginView() {
   const classes = stylesObj();
@@ -31,11 +39,30 @@ export default function LoginView() {
   const [showPassword, setShowPassword] = useState({
     password: false,
   });
+  const [Profile, setProfile] = useState([]);
 
+  const ContextConsumer = useContext(Context);
+  const { dispatch } = ContextConsumer;
   let theme = useTheme();
   const router = useRouter();
-  const handleRemberUsername = (event) => {
-    setChecked(event.target.checked);
+
+  const getProfiledata = (token) => {
+    if (formData.username) {
+      const request = {
+        username: formData.username,
+        wsfunction: GETPROFILE,
+        wstoken: Cookies.get("access_token") || token,
+      };
+      getProfile(
+        request,
+        (res) => {
+          setProfile(res?.data[0]);
+          dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
+          router.push("/dashboard");
+        },
+        (err) => {}
+      );
+    }
   };
 
   const handleSubmit = async (data) => {
@@ -46,7 +73,6 @@ export default function LoginView() {
       moodlewsrestformat: MOODLEFORMAT,
     };
     setIsLoading(true);
-    // debugger;
     schema
       .validate(formData, { abortEarly: false })
       .then(async (valid) => {
@@ -54,11 +80,10 @@ export default function LoginView() {
           request,
           (res) => {
             if (res?.data?.token) {
+              getProfiledata(res?.data?.token);
               localStorage.setItem("access_token", res?.data?.token);
               document.cookie = `access_token=${res?.data?.token}; path=/`;
-              router.push("/dashboard");
             }
-
             if (res?.data?.error) {
               setResponseErrors(res?.data?.error);
             }
@@ -88,7 +113,6 @@ export default function LoginView() {
   const handleChange = (e) => {
     errors[e.target.name] = "";
     setResponseErrors("");
-
     setData({
       ...formData,
       [e.target.name]: e.target.value,

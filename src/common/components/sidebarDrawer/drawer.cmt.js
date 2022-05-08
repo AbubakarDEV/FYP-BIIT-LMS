@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -15,6 +15,9 @@ import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomIconButton from "../../icons/IconButton/IconButton.cmp";
 import Avatar from "@mui/material/Avatar";
+import Context from "../../context/context";
+import Cookies from "js-cookie";
+
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -38,6 +41,10 @@ export default function SideDrawer() {
   const [open, setOpen] = React.useState(false);
   const classes = sideDrawerStyles();
   const router = useRouter();
+
+  const ContextConsumer = useContext(Context);
+  const { profile, dispatch } = ContextConsumer;
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -49,7 +56,15 @@ export default function SideDrawer() {
   const handleItemClick = (e, path) => {
     router.push(path);
   };
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    document.cookie =
+      "access_token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/";
 
+    dispatch({ type: "UPDATE_PROFILE", value: {} });
+
+    router.push("/login");
+  };
   const Item = ({ children, text, path }) => {
     return (
       <ListItem
@@ -62,6 +77,7 @@ export default function SideDrawer() {
       </ListItem>
     );
   };
+
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
@@ -80,10 +96,15 @@ export default function SideDrawer() {
               BIIT LMS
             </Typography>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Typography variant="body1" className={classes.username}>
-                Admin
-              </Typography>
-              <Avatar alt="Remy Sharp" src="/images/user.png" />
+              {profile?.fullname && (
+                <Typography variant="body1" className={classes.username}>
+                  {profile?.fullname}
+                </Typography>
+              )}
+              <Avatar
+                alt="Remy Sharp"
+                src={profile?.profileimageurlsmall || "/images/user.png"}
+              />
             </div>
           </div>
         </Toolbar>
@@ -114,18 +135,24 @@ export default function SideDrawer() {
         <Item text="Dashboard" path="/dashboard">
           <img src="/images/dashboard.png" style={{ width: 25 }} />
         </Item>
-        <Item text="Courses" path="/dashboard/course">
+        {/* <Item text="Courses" path="/dashboard/course">
           <img src="/images/folder.png" style={{ width: 25 }} />
         </Item>
         <Item text="Weeks" path="/dashboard/course/weeks">
           <img src="/images/weeks.png" style={{ width: 25 }} />
-        </Item>
+        </Item> */}
         <Item text="Profile" path="/dashboard/profile">
           <img src="/images/profile.png" style={{ width: 25 }} />
         </Item>
-        <Item text="Logout" path="/login">
-          <img src="/images/logout.png" style={{ width: 25 }} />
-        </Item>
+        {/* <Item text="Logout" path="/login">
+          
+        </Item> */}
+        <ListItem button className={classes.listItem} onClick={handleLogout}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <img src="/images/logout.png" style={{ width: 25 }} />
+          </ListItemIcon>
+          <ListItemText primary={"Logout"} />
+        </ListItem>
       </Drawer>
     </Box>
   );

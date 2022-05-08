@@ -5,7 +5,14 @@ export function profileReducer(state, action) {
         ...action.value,
         isLoading: action.isLoading || false,
       };
-    default:
-      throw new Error();
+  }
+}
+export function coursesReducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_COURSE":
+      return {
+        ...action.value,
+        isLoading: action.isLoading || false,
+      };
   }
 }
