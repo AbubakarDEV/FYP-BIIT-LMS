@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import TextField from "@mui/material/TextField";
@@ -13,7 +12,6 @@ import {
   MOODLEFORMAT,
   SERVICE_NAME,
 } from "../../common/constants";
-import { useTheme } from "@mui/material/styles";
 import schema from "./loginValidation";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
@@ -27,23 +25,19 @@ import Context from "../../common/context/context";
 
 export default function LoginView() {
   const classes = stylesObj();
-  const [checked, setChecked] = useState(false);
   const [formData, setData] = useState({
     username: "",
     password: "",
   });
-  // const [username, setUsername] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [responseError, setResponseErrors] = useState("");
   const [showPassword, setShowPassword] = useState({
     password: false,
   });
-  const [Profile, setProfile] = useState([]);
-
   const ContextConsumer = useContext(Context);
   const { dispatch } = ContextConsumer;
-  let theme = useTheme();
+
   const router = useRouter();
 
   const getProfiledata = (token) => {
@@ -56,7 +50,6 @@ export default function LoginView() {
       getProfile(
         request,
         (res) => {
-          setProfile(res?.data[0]);
           dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
           router.push("/dashboard");
         },

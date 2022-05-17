@@ -56,69 +56,21 @@ export default function ProfileView() {
             xs={12}
             sm={12}
             md={6}
-            lg={3}
+            lg={4}
             className={classes.profileimgGrid}
           >
-            <div className={classes.imageInnerCnt}>
-              {image ? (
-                <>
-                  {!isImgLoading ? (
-                    <div className={classes.galleryImgCnt}>
-                      <img
-                        src={
-                          profile?.profileimageurlsmall || "/images/logoimg.jpg"
-                        }
-                        alt="galleryImg"
-                        className={classes.galleryImg}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = image;
-                        }}
-                      />
-                      <div {...getRootProps({ className: "dropzone" })}>
-                        <input {...getInputProps()} />
-                        <Typography
-                          variant="body1"
-                          className={classes.editIcon}
-                        >
-                          Update
-                        </Typography>
-                        {/* <EditIcon className={classes.editIcon} /> */}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className={classes.uploadImageContainer}>
-                      <LinearProgress
-                        width="100px"
-                        className={classes.uploadProgress}
-                      />
-                      <Typography variant="body2">Uploading...</Typography>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  {!isLoadingg ? (
-                    <div {...getRootProps({ className: "dropzone" })}>
-                      <input {...getInputProps()} />
-                      <div className={classes.uploadImageGridItem}>
-                        <CloudUploadIcon className={classes.uploadIcon} />
-                        <Typography variant="h4">Upload Image</Typography>
-                      </div>
-                    </div>
-                  ) : (
-                    <Spinner
-                      animation="border"
-                      style={{ width: 50, height: 50 }}
-                      variant="primary"
-                    />
-                  )}
-                </>
-              )}
-            </div>
+            <img
+              src={profile?.profileimageurlsmall || "/images/logoimg.jpg"}
+              alt="galleryImg"
+              className={classes.galleryImg}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = image;
+              }}
+            />
           </Grid>
 
-          <Grid lg={8} sm={12} md={6} item className={classes.textfieldGrid}>
+          <Grid lg={7} sm={12} md={6} item className={classes.textfieldGrid}>
             <Typography variant="h4">Update Profile</Typography>
 
             <TextField
@@ -149,9 +101,9 @@ export default function ProfileView() {
               label="Phone"
               defaultValue="0317 5867877"
             /> */}
-            <Button variant="contained" className={classes.profileBtn}>
+            {/* <Button variant="contained" className={classes.profileBtn}>
               Update Profile
-            </Button>
+            </Button> */}
             <Divider />
             <div
               style={{
@@ -173,9 +125,9 @@ export default function ProfileView() {
                 label="New Password"
                 defaultValue=""
               />
-              <Button variant="contained" className={classes.passwordBtn}>
+              {/* <Button variant="contained" className={classes.passwordBtn}>
                 Update Password
-              </Button>
+              </Button> */}
             </div>
           </Grid>
         </Grid>

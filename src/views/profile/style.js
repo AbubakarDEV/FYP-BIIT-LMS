@@ -14,18 +14,25 @@ const useStyles = makeStyles((theme) => {
     },
     gridContainer: {
       padding: "20px 0px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     captionCnt: {
       [theme.breakpoints.down("sm")]: {
         padding: 20,
       },
     },
-
+    profileimgGrid: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
     galleryImgCnt: {
       position: "relative",
     },
     galleryImg: {
-      Width: 150,
+      // Width: 150,
       height: 150,
     },
     editIcon: {

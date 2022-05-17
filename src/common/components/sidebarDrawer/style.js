@@ -72,6 +72,9 @@ const sideDrawerStyles = makeStyles((theme) => ({
     fontSize: 16,
     fontWeight: 600,
     letterSpacing: 1,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 14,
+    },
   },
 }));
 

@@ -13,10 +13,8 @@ import ListItemText from "@mui/material/ListItemText";
 import sideDrawerStyles from "./style";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
-import CustomIconButton from "../../icons/IconButton/IconButton.cmp";
 import Avatar from "@mui/material/Avatar";
 import Context from "../../context/context";
-import Cookies from "js-cookie";
 
 const drawerWidth = 240;
 

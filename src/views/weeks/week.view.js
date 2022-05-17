@@ -22,7 +22,7 @@ export default function WeekView(props) {
       </div>
     );
   };
-
+  debugger;
   return (
     <>
       <div className={classes.weeksContainer}>
@@ -41,59 +41,36 @@ export default function WeekView(props) {
             ContentStyles={{ style: { overflowY: "hidden" } }}
             content={
               <div className={classes.optionsCnt}>
-                <a
-                  href={item?.modules[0]?.url}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginBottom: 20,
-                    }}
+                {item.modules.map((mod, index) => (
+                  <a
+                    href={
+                      mod?.modplural == "URLs"
+                        ? mod.contents[0].fileurl
+                        : mod.url
+                    }
+                    target="_blank"
+                    style={{ textDecoration: "none" }}
                   >
-                    <img
-                      src={item?.modules[0]?.modicon}
-                      style={{ width: 20, height: 20, marginRight: 10 }}
-                    />
-                    <Typography
-                      variant="h4"
-                      style={{ margin: 0, color: "gray", fontSize: 20 }}
-                    >
-                      {item?.modules[0]?.name}
-                    </Typography>
-                  </div>
-                </a>
-                <a
-                  href={item?.modules[1]?.contents[0]?.fileurl}
-                  target="_blank"
-                  style={{ textDecoration: "none" }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginBottom: 20,
-                    }}
-                  >
-                    <img
-                      src={item?.modules[1]?.modicon}
-                      style={{ width: 20, height: 20, marginRight: 10 }}
-                    />
-
-                    <Typography
-                      variant="h4"
+                    <div
                       style={{
-                        margin: 0,
-                        fontSize: 20,
-                        color: "gray",
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: 20,
                       }}
                     >
-                      {item?.modules[1]?.name}
-                    </Typography>
-                  </div>
-                </a>
+                      <img
+                        src={mod?.modicon}
+                        style={{ width: 20, height: 20, marginRight: 10 }}
+                      />
+                      <Typography
+                        variant="h4"
+                        style={{ margin: 0, color: "gray", fontSize: 20 }}
+                      >
+                        {mod?.name}
+                      </Typography>
+                    </div>
+                  </a>
+                ))}
               </div>
             }
           />
