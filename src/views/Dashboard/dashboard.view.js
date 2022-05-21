@@ -24,7 +24,8 @@ export default function DashboardView() {
     if (profile.id == 2) {
       const request = {
         wsfunction: GETALLCOURSES,
-        wstoken: Cookies.get("access_token"),
+        wstoken:
+          localStorage.getItem("access_token") || Cookies.get("access_token"),
       };
       getAllCourses(
         request,
@@ -38,7 +39,8 @@ export default function DashboardView() {
       const request = {
         userID: profile.id,
         wsfunction: GETENROLLEDCOURSES,
-        wstoken: Cookies.get("access_token"),
+        wstoken:
+          localStorage.getItem("access_token") || Cookies.get("access_token"),
       };
       getCourses(
         request,

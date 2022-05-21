@@ -45,7 +45,10 @@ export default function LoginView() {
       const request = {
         username: formData.username,
         wsfunction: GETPROFILE,
-        wstoken: Cookies.get("access_token") || token,
+        wstoken:
+          localStorage.getItem("access_token") ||
+          Cookies.get("access_token") ||
+          token,
       };
       getProfile(
         request,
