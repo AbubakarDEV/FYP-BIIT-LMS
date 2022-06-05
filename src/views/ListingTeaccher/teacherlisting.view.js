@@ -13,27 +13,32 @@ export default function TeacherlistingView(props) {
 
   const [teacherListings, setTeacherListings] = useState(teacherListing);
   const [studentListings, setStudentListings] = useState(teacherListing);
+  const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
+    setLoading(true);
     setTeacherListings(
       teacherListing.filter(
-        (item) => item.roles[0].shortname == "editingteacher"
+        (item) => item?.roles[0]?.shortname == "editingteacher"
       )
     );
+    setLoading(false);
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     setStudentListings(
       studentListings.filter(
-        (item) => item.roles[0].shortname != "editingteacher"
+        (item) => item?.roles[0]?.shortname != "editingteacher"
       )
     );
+    setLoading(false);
   }, []);
 
   return (
     <>
       <div className={classes.listingContainer}>
-        {teacherListings.length > 0 && (
+        {teacherListings?.length > 0 && (
           <>
             <Typography variant="h3" className={classes.title}>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -66,8 +71,8 @@ export default function TeacherlistingView(props) {
                     </Typography>
                   </div>
                   <div style={{ display: "flex", flexWrap: "wrap" }}>
-                    {item.enrolledcourses.map((course) => (
-                      <Stack direction="row" style={{ marginRight: 5 }}>
+                    {item?.enrolledcourses?.map((course) => (
+                      <Stack direction="row" style={{ margin: 5 }}>
                         <Chip
                           onClick={() =>
                             router.push(
@@ -85,8 +90,8 @@ export default function TeacherlistingView(props) {
                     Sections:
                   </Typography>
                   <div style={{ display: "flex", flexWrap: "wrap" }}>
-                    {item.groups.map((sections) => (
-                      <Stack direction="row" style={{ marginRight: 5 }}>
+                    {item?.groups?.map((sections) => (
+                      <Stack direction="row" style={{ margin: 5 }}>
                         <Chip
                           variant="outlined"
                           label={sections.name}
@@ -128,7 +133,7 @@ export default function TeacherlistingView(props) {
                       >
                         Email:
                       </Typography>
-                      <Stack direction="row" style={{ marginRight: 5 }}>
+                      <Stack direction="row" style={{ margin: 5 }}>
                         <Chip
                           icon={<EmailIcon />}
                           label={item.email}
@@ -143,8 +148,8 @@ export default function TeacherlistingView(props) {
                         Courses:
                       </Typography>
                       <div style={{ display: "flex", flexWrap: "wrap" }}>
-                        {item.enrolledcourses.map((course) => (
-                          <Stack direction="row" style={{ marginRight: 5 }}>
+                        {item?.enrolledcourses?.map((course) => (
+                          <Stack direction="row" style={{ margin: 5 }}>
                             <Chip
                               onClick={() =>
                                 router.push(
@@ -166,7 +171,7 @@ export default function TeacherlistingView(props) {
                       </Typography>
                       <div style={{ display: "flex", flexWrap: "wrap" }}>
                         {item.groups.map((sections) => (
-                          <Stack direction="row" style={{ marginRight: 5 }}>
+                          <Stack direction="row" style={{ margin: 5 }}>
                             <Chip
                               variant="outlined"
                               label={sections.name}
@@ -181,25 +186,6 @@ export default function TeacherlistingView(props) {
                   </Grid>
                 </>
               ))}
-              {/* {studentListings?.map((item) => (
-                <Grid item xs={12} md={4}>
-                  <Stack direction="row" style={{ margin: 15 }}>
-                    <Chip
-                      label={item.fullname}
-                      style={{ fontSize: 20 }}
-                      color="primary"
-                    />
-                    {item.groups.map((sections) => (
-                      <Chip
-                        variant="outlined"
-                        label={sections.name}
-                        // style={{ fontSize: 20 }}
-                        color="primary"
-                      />
-                    ))}
-                  </Stack>
-                </Grid>
-              ))} */}
             </Grid>
           </>
         )}

@@ -1,125 +1,80 @@
-import React, { useEffect, useContext } from "react";
-import useStyles from "./style";
+import React, { useContext } from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Footer from "../../common/components/footer/footer.cmt";
-import { Grid } from "@mui/material";
-import LinearProgress from "@mui/material/LinearProgress";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-import { getCourses, getAllCourses } from "../../common/actions/dashboard";
-import { GETENROLLEDCOURSES, GETALLCOURSES } from "../../common/constants";
-import Context from "../../common/context/context";
+import Box from "@mui/material/Box";
+import ActiveCourses from "./ActiveCourses/activeCourses";
+import StudentListing from "./StudentsListing/studentListing";
+import TeacherListing from "./TeachersListing/TeacherListing";
+import ListIcon from "@mui/icons-material/List";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 export default function DashboardView() {
-  const classes = useStyles();
-  const router = useRouter();
-  const [courses, setCourses] = React.useState([]);
-  const ContextConsumer = useContext(Context);
-  const { profile, dispatchCourses } = ContextConsumer;
+  const [value, setValue] = React.useState(0);
 
-  useEffect(() => {
-    if (profile.id == 2) {
-      const request = {
-        wsfunction: GETALLCOURSES,
-        wstoken:
-          localStorage.getItem("access_token") || Cookies.get("access_token"),
-      };
-      getAllCourses(
-        request,
-        (res) => {
-          setCourses(res.data);
-          dispatchCourses({ type: "UPDATE_COURSE", value: res?.data });
-        },
-        (err) => {}
-      );
-    } else {
-      const request = {
-        userID: profile.id,
-        wsfunction: GETENROLLEDCOURSES,
-        wstoken:
-          localStorage.getItem("access_token") || Cookies.get("access_token"),
-      };
-      getCourses(
-        request,
-        (res) => {
-          setCourses(res.data);
-          dispatchCourses({ type: "UPDATE_COURSE", value: res?.data });
-        },
-        (err) => {}
-      );
-    }
-  }, []);
-
-  const Cards = ({ Date, Title, cardWidth, link }) => {
-    return (
-      <Card
-        onClick={
-          profile.id == 2
-            ? () => router.push(`/dashboard/teacherslisting/${link}`)
-            : () => router.push(`/dashboard/${Title}/${link}`)
-        }
-        sx={{ width: cardWidth }}
-        className={classes.recentCoursesCard}
-      >
-        <CardMedia
-          component="img"
-          height="140"
-          image="/images/cardimg3.jpg"
-          alt="green iguana"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography
-            className={classes.cardData}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            {Date}
-          </Typography>
-          <Typography
-            className={classes.cardTitle}
-            variant="h4"
-            color="text.secondary"
-          >
-            {Title}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
   return (
     <>
-      <div className={classes.dashboardCnt}>
-        <Typography variant="h3" className={classes.title}>
-          <img src="/images/course.png" width={"40px"} /> Enrolled courses
-        </Typography>
-        <Grid container spacing={5} className={classes.gridContainer}>
-          {courses.length > 0 &&
-            courses?.map((item) => (
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                lg={3}
-                md={4}
-                className={classes.leftGrid}
-              >
-                <Cards
-                  cardWidth={250}
-                  Date={item.shortname}
-                  Title={item.displayname}
-                  link={item.id}
-                  endDate={item.enddate}
-                  startDate={item.startdate}
-                />
-              </Grid>
-            ))}
-        </Grid>
-      </div>
-      <Footer />
+      <Box sx={{ width: "100%" }} style={{ marginTop: 80 }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            aria-label="basic tabs example"
+          >
+            <Tab icon={<ListIcon />} label="Active Courses" {...a11yProps(0)} />
+            <Tab
+              icon={<PersonPinIcon />}
+              label="Active Students"
+              {...a11yProps(1)}
+            />
+            <Tab
+              icon={<SupervisedUserCircleIcon />}
+              label="Active Teachers"
+              {...a11yProps(2)}
+            />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <ActiveCourses />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <StudentListing />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <TeacherListing />
+        </TabPanel>
+      </Box>
     </>
   );
 }

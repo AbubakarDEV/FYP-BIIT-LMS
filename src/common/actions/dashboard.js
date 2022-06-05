@@ -34,6 +34,19 @@ export const getAllCourses = (request, callback, failure) => {
       failure(error);
     });
 };
+
+export const getAllUserListings = (request, callback, failure) => {
+  Axios.get(
+    `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&courseid=1&moodlewsrestformat=json`
+  )
+    .then((res) => {
+      callback(res);
+    })
+    .catch((error) => {
+      failure(error);
+    });
+};
+
 export const getCourseWeeks = (request, callback, failure) => {
   Axios.get(
     `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&courseid=${request.courseid}&moodlewsrestformat=json`

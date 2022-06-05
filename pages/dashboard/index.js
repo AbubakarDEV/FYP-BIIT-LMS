@@ -1,17 +1,20 @@
-// import React from "react";
+import React, { useContext } from "react";
 import Head from "next/head";
-import React from "react";
 import SideDrawer from "../../src/common/components/sidebarDrawer/drawer.cmt";
-import DashboardView from "../../src/views/Dashboard/dashboard.view";
+import Context from "../../src/common/context/context";
+import DashbaordIndex from "../../src/views/Dashboard";
 
 export default function Dashboard() {
+  const ContextConsumer = useContext(Context);
+  const { profile } = ContextConsumer;
+
   return (
     <>
       <Head>
         <title>BIIT LMS</title>
       </Head>
       <SideDrawer />
-      <DashboardView />
+      <DashbaordIndex profileID={profile?.id} />
     </>
   );
 }

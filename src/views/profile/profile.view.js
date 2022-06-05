@@ -1,14 +1,10 @@
 import React, { useState, useContext } from "react";
 import useStyles from "./style";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Divider from "@mui/material/Divider";
-import Spinner from "react-bootstrap/Spinner";
 import Footer from "../../common/components/footer/footer.cmt";
 import Context from "../../common/context/context";
 
@@ -16,7 +12,6 @@ export default function ProfileView() {
   const classes = useStyles();
   const [image, setImage] = useState("/images/book.png");
   const [isImgLoading, setIsImgLoading] = useState(false);
-  const [isLoadingg, setIsLoading] = useState(false);
 
   const ContextConsumer = useContext(Context);
   const { profile } = ContextConsumer;
@@ -91,19 +86,7 @@ export default function ProfileView() {
               label="Country"
               defaultValue="Pakistan"
             />
-            {/* <TextField
-              className={classes.emailTextfield}
-              label="City/Town"
-              defaultValue="Rawalpindi"
-            />
-            <TextField
-              className={classes.emailTextfield}
-              label="Phone"
-              defaultValue="0317 5867877"
-            /> */}
-            {/* <Button variant="contained" className={classes.profileBtn}>
-              Update Profile
-            </Button> */}
+
             <Divider />
             <div
               style={{

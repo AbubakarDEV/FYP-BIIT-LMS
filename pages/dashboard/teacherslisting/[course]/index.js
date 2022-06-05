@@ -8,7 +8,7 @@ import TeacherlistingView from "../../../../src/views/ListingTeaccher/teacherlis
 
 export default function TeacherListing(props) {
   const { teacherListing } = props;
-  debugger;
+
   return (
     <>
       <Head>
