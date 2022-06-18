@@ -4,14 +4,14 @@ const useStyles = makeStyles((theme) => {
   return {
     dashboardCnt: {
       height: "100%",
-      padding: theme.spacing(10, 1),
-
-      [theme.breakpoints.down("sm")]: {
-        padding: theme.spacing(8, 0),
-      },
-      [theme.breakpoints.only("md")]: {
-        padding: theme.spacing(10, 1),
-      },
+      // padding: theme.spacing(10, 1),
+      padding: "40px 0px 0px 0px",
+      // [theme.breakpoints.down("sm")]: {
+      //   padding: theme.spacing(8, 0),
+      // },
+      // [theme.breakpoints.only("md")]: {
+      //   padding: theme.spacing(10, 1),
+      // },
     },
     leftGrid: {
       justifyContent: "center",
@@ -33,48 +33,36 @@ const useStyles = makeStyles((theme) => {
     },
     cardDate: {
       fontSize: 16,
-      color: theme.palette.typography.darkGray,
-      // color: "red !important",
+      color: "#343A40",
     },
-    gridContainer: {
-      // padding: theme.spacing(10, 1),
-      // [theme.breakpoints.down("sm")]: {
-      //   padding: theme.spacing(8, 0),
-      // },
-      // [theme.breakpoints.only("md")]: {
-      //   padding: theme.spacing(10, 1),
-      // },
-    },
+
     submitBtn: {
       position: "absolute",
       right: 8,
       bottom: 5,
       fontSize: 20,
       fontWeight: 700,
-      color: theme.palette.typography.blueMedium,
+      color: "#00a2e8",
     },
     cardContent: {
       position: "relative",
     },
     cardsCnt: {
-      // display: "flex",
-      // justifyContent: "space-between",
-      // flexWrap: "wrap",
-      [theme.breakpoints.down("sm")]: {
-        justifyContent: "center",
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   justifyContent: "center",
+      // },
     },
     cardData: {
-      color: theme.palette.typography.blue,
+      color: "#0565d8",
     },
     cardTitle: {
-      color: theme.palette.typography.darkGray,
+      color: "#343A40",
     },
     recentCoursesCard: {
       cursor: "pointer",
       display: "flex",
       flexDirection: "column",
-      background: theme.palette.background.lightGray1,
+      background: "#e6e6e6",
       margin: "0px 0px 50px 0px",
     },
 
@@ -83,17 +71,17 @@ const useStyles = makeStyles((theme) => {
       alignItems: "center",
       justifyContent: "center",
       flexDirection: "column",
-      [theme.breakpoints.only("md")]: {
-        flexDirection: "unset",
-        flexWrap: "wrap",
-      },
-      [theme.breakpoints.down("sm")]: {
-        margin: "10px 10px",
-      },
+      // [theme.breakpoints.only("md")]: {
+      //   flexDirection: "unset",
+      //   flexWrap: "wrap",
+      // },
+      // [theme.breakpoints.down("sm")]: {
+      //   margin: "10px 10px",
+      // },
     },
     title: {
-      color: theme.palette.typography.darkOrange,
-      background: theme.palette.background.antiwhite,
+      color: "#FF6600",
+      background: "#faebd7",
       padding: 10,
     },
   };

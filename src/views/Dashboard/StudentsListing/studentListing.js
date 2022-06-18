@@ -67,7 +67,7 @@ export default function TeacherListing() {
             </div>
           ) : (
             <>
-              {students.length > 0 && (
+              {students.length > 0 ? (
                 <>
                   <Typography variant="h3" className={classes.title}>
                     <div>
@@ -87,7 +87,6 @@ export default function TeacherListing() {
                         </Select>
                       </FormControl>
                     </span>
-                    {/* <span>{season}</span> */}
                     <span>Total Students: {students.length}</span>
                   </Typography>
 
@@ -141,27 +140,33 @@ export default function TeacherListing() {
                                 </Stack>
                               ))}
                             </div>
-                            <Typography
-                              variant="Body1"
-                              className={classes.courseName}
-                            >
-                              Sections:
-                            </Typography>
-                            <div style={{ display: "flex", flexWrap: "wrap" }}>
-                              {item.groups.map((sections) => (
-                                <Stack
-                                  direction="row"
-                                  style={{ marginRight: 5 }}
+                            {item.groups.length > 0 && (
+                              <>
+                                <Typography
+                                  variant="Body1"
+                                  className={classes.courseName}
                                 >
-                                  <Chip
-                                    variant="outlined"
-                                    label={sections.name}
-                                    color="success"
-                                    className={classes.chip}
-                                  />
-                                </Stack>
-                              ))}
-                            </div>
+                                  Sections:
+                                </Typography>
+                                <div
+                                  style={{ display: "flex", flexWrap: "wrap" }}
+                                >
+                                  {item.groups.map((sections) => (
+                                    <Stack
+                                      direction="row"
+                                      style={{ marginRight: 5 }}
+                                    >
+                                      <Chip
+                                        variant="outlined"
+                                        label={sections.name}
+                                        color="success"
+                                        className={classes.chip}
+                                      />
+                                    </Stack>
+                                  ))}
+                                </div>
+                              </>
+                            )}
                           </div>
                           <Divider></Divider>
                         </Grid>
@@ -169,6 +174,11 @@ export default function TeacherListing() {
                     ))}
                   </Grid>
                 </>
+              ) : (
+                <div className={classes.noListingFound}>
+                  <img src="/images/book.png" width={"100px"} />
+                  <Typography variant="h3"> No Listing found</Typography>
+                </div>
               )}
             </>
           )}

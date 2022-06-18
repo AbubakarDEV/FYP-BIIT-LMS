@@ -23,7 +23,7 @@ const stylesObj = makeStyles((theme) => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      background: theme.palette.background.white,
+      background: "white",
     },
     gridCntLeft: {
       padding: 20,
@@ -31,7 +31,7 @@ const stylesObj = makeStyles((theme) => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      background: theme.palette.background.blueMedium,
+      background: "#00a2e8",
       // background: "#00a2e8",
     },
     inputCnt: {
@@ -43,27 +43,27 @@ const stylesObj = makeStyles((theme) => {
     username: {
       width: 350,
       marginBottom: 20,
-      [theme.breakpoints.down("sm")]: {
-        width: 260,
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   width: 260,
+      // },
     },
     password: {
       width: 350,
       marginBottom: 20,
-      [theme.breakpoints.down("sm")]: {
-        width: 260,
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   width: 260,
+      // },
     },
     loginBtn: {
       width: 350,
       "& a": {
-        color: theme.palette.background.white,
+        color: "white",
       },
       marginTop: 20,
-      background: theme.palette.background.blueMedium,
-      [theme.breakpoints.down("sm")]: {
-        width: 260,
-      },
+      background: "#00a2e8",
+      // [theme.breakpoints.down("sm")]: {
+      //   width: 260,
+      // },
     },
     rememberUsername: {
       display: "flex",
@@ -76,7 +76,7 @@ const stylesObj = makeStyles((theme) => {
       marginBottom: 20,
     },
     rightGrid: {
-      background: theme.palette.background.white,
+      background: "white",
       padding: 40,
       borderRadius: 20,
       display: "flex",
@@ -84,9 +84,9 @@ const stylesObj = makeStyles((theme) => {
       justifyContent: "center",
       flexDirection: "column",
       boxShadow: "1px 1px 1px 3px rgba(0,0,0,0.1)",
-      [theme.breakpoints.down("sm")]: {
-        padding: 15,
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   padding: 15,
+      // },
     },
   };
 });

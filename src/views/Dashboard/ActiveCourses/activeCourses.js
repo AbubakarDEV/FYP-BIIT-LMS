@@ -69,9 +69,7 @@ export default function ActiveCourses(props) {
         request,
         (res) => {
           setLoading(false);
-          // setCourses(
-          //   res.data.filter((itm) => itm.shortname.split("-")[1] == "2021S")
-          // );
+
           if (selectSeason == "Spring 2021") {
             setCourses(
               res.data.filter((itm) => itm.shortname.split("-")[1] == "2021S")
@@ -146,59 +144,71 @@ export default function ActiveCourses(props) {
         </div>
       ) : (
         <>
-          <div
-            className={
-              applyStyle
-                ? classes.activeCourseCnt
-                : classes.activeAdminCourseCnt
-            }
-          >
-            <Typography variant="h3" className={classes.title}>
-              <div>
-                {" "}
-                <img src="/images/course.png" width={"40px"} /> Enrolled courses
-              </div>
-              <span>
-                <FormControl className={classes.select}>
-                  <InputLabel>Select Season</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={selectSeason}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={"Spring 2021"}>Spring 2021</MenuItem>
-                    <MenuItem value={"Fall 2020"}>Fall 2020</MenuItem>
-                  </Select>
-                </FormControl>
-              </span>
-              {/* <span>{season}</span> */}
-              <spam>Total Courses:{courses.length}</spam>
-            </Typography>
+          {courses.length > 0 ? (
+            <div
+              className={
+                applyStyle
+                  ? classes.activeCourseCnt
+                  : classes.activeAdminCourseCnt
+              }
+            >
+              <Typography variant="h3" className={classes.title}>
+                <div>
+                  {" "}
+                  <img src="/images/course.png" width={"40px"} /> Enrolled
+                  courses
+                </div>
+                <span>
+                  <FormControl className={classes.select}>
+                    <InputLabel>Select Season</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={selectSeason}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={"Spring 2021"}>Spring 2021</MenuItem>
+                      <MenuItem value={"Fall 2020"}>Fall 2020</MenuItem>
+                    </Select>
+                  </FormControl>
+                </span>
+                <spam>Total Courses:{courses.length}</spam>
+              </Typography>
 
-            <Grid container spacing={5} className={classes.gridContainer}>
-              {courses.length > 0 &&
-                courses?.map((item) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    lg={3}
-                    md={4}
-                    className={classes.leftGrid}
-                  >
-                    <Cards
-                      cardWidth={250}
-                      Date={item.shortname}
-                      Title={item.displayname}
-                      link={item.id}
-                      endDate={item.enddate}
-                      startDate={item.startdate}
-                    />
-                  </Grid>
-                ))}
-            </Grid>
-          </div>
+              <Grid container spacing={5} className={classes.gridContainer}>
+                <>
+                  {courses?.map((item) => (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      lg={3}
+                      md={4}
+                      className={classes.leftGrid}
+                    >
+                      <Cards
+                        cardWidth={250}
+                        Date={item.shortname}
+                        Title={item.displayname}
+                        link={item.id}
+                        endDate={item.enddate}
+                        startDate={item.startdate}
+                      />
+                    </Grid>
+                  ))}
+                </>
+              </Grid>
+            </div>
+          ) : (
+            <>
+              {loading && (
+                <div className={classes.noListingFound}>
+                  <img src="/images/book.png" width={"100px"} />
+                  <Typography variant="h3"> No Listing found</Typography>
+                </div>
+              )}
+            </>
+          )}
         </>
       )}
     </div>

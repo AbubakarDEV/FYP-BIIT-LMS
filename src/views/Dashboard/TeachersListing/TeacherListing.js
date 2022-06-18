@@ -1,19 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import useStyles from "./style";
-// import Typography from "@mui/material/Typography";
 import { Divider, Grid, Typography } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-// import { useRouter } from "next/router";
 import EmailIcon from "@mui/icons-material/Email";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { getAllUserListings } from "../../../common/actions/dashboard";
 import { GETALLENROLLEDUSER } from "../../../common/constants";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+
 export default function TeacherListing(props) {
   const classes = useStyles();
   const router = useRouter();
@@ -58,7 +53,7 @@ export default function TeacherListing(props) {
         </div>
       ) : (
         <>
-          {teachers.length > 0 && (
+          {teachers.length > 0 ? (
             <>
               <Typography variant="h3" className={classes.title}>
                 <div>
@@ -119,24 +114,31 @@ export default function TeacherListing(props) {
                             </Stack>
                           ))}
                         </div>
-                        <Typography
-                          variant="Body1"
-                          className={classes.courseName}
-                        >
-                          Sections:
-                        </Typography>
-                        <div style={{ display: "flex", flexWrap: "wrap" }}>
-                          {item.groups.map((sections) => (
-                            <Stack direction="row" style={{ marginRight: 5 }}>
-                              <Chip
-                                variant="outlined"
-                                label={sections.name}
-                                color="success"
-                                className={classes.chip}
-                              />
-                            </Stack>
-                          ))}
-                        </div>
+                        {item.groups.length > 0 && (
+                          <>
+                            <Typography
+                              variant="Body1"
+                              className={classes.courseName}
+                            >
+                              Sections:
+                            </Typography>
+                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                              {item.groups.map((sections) => (
+                                <Stack
+                                  direction="row"
+                                  style={{ marginRight: 5 }}
+                                >
+                                  <Chip
+                                    variant="outlined"
+                                    label={sections.name}
+                                    color="success"
+                                    className={classes.chip}
+                                  />
+                                </Stack>
+                              ))}
+                            </div>
+                          </>
+                        )}
                       </div>
                       <Divider></Divider>
                     </Grid>
@@ -144,6 +146,11 @@ export default function TeacherListing(props) {
                 ))}
               </Grid>
             </>
+          ) : (
+            <div className={classes.noListingFound}>
+              <img src="/images/book.png" width={"100px"} />
+              <Typography variant="h3"> No Listing found</Typography>
+            </div>
           )}
         </>
       )}

@@ -3,7 +3,8 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     weeksContainer: {
-      margin: theme.spacing(10, 1),
+      margin: "80px 10px 10px 10px",
+      // margin: theme.spacing(10, 1),
     },
     weekCnt: {
       padding: 20,
@@ -18,17 +19,17 @@ const useStyles = makeStyles((theme) => {
       margin: 0,
       fontSize: 30,
       marginBottom: 20,
-      [theme.breakpoints.down("sm")]: {
-        fontSize: 20,
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   fontSize: 20,
+      // },
     },
     mid: {
-      background: theme.palette.background.blueMedium,
+      background: "#00a2e8",
       letterSpacing: 20,
       fontWeight: 800,
       margin: 0,
       padding: 10,
-      color: theme.palette.typography.darkGray,
+      color: "#343A40",
     },
   };
 });
