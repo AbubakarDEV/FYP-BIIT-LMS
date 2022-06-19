@@ -11,7 +11,17 @@ export const getProfile = (request, callback, failure) => {
       failure(error);
     });
 };
-
+export const getAssignmenParticipants = (request, callback, failure) => {
+  Axios.get(
+    `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&groupid=0&filter&assignid=${request.assignedID}&moodlewsrestformat=json`
+  )
+    .then((res) => {
+      callback(res);
+    })
+    .catch((error) => {
+      failure(error);
+    });
+};
 export const getCourses = (request, callback, failure) => {
   Axios.get(
     `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&userid=${request.userID}&moodlewsrestformat=json`

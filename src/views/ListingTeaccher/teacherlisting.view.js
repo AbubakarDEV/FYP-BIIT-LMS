@@ -13,26 +13,31 @@ export default function TeacherlistingView(props) {
 
   const [teacherListings, setTeacherListings] = useState(teacherListing);
   const [studentListings, setStudentListings] = useState(teacherListing);
-  const [loading, setLoading] = React.useState(false);
-
+  debugger;
   useEffect(() => {
-    setLoading(true);
+    const courseCode = localStorage.getItem("courseCode");
+    // const EditTeacher = teacherListing.filter(
+    //   (item) => item?.roles[0]?.shortname == "editingteacher"
+    // );
+    // const Courses = EditTeacher.map((item) => item.enrolledcourses);
+    // setTeacherListings(
+    //   Courses[0].filter(
+    //     (ii) => ii.shortname.split("-")[1] == courseCode.split("-")[1]
+    //   )
+    // );
     setTeacherListings(
       teacherListing.filter(
         (item) => item?.roles[0]?.shortname == "editingteacher"
       )
     );
-    setLoading(false);
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     setStudentListings(
       studentListings.filter(
         (item) => item?.roles[0]?.shortname != "editingteacher"
       )
     );
-    setLoading(false);
   }, []);
 
   return (

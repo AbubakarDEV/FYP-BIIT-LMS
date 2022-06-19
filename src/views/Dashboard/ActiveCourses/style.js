@@ -4,14 +4,13 @@ const useStyles = makeStyles((theme) => {
   return {
     activeCourseCnt: {
       height: "100%",
-      padding: "80px 10px 20px 10px",
-      // padding: theme.spacing(10, 1),
-      // [theme.breakpoints.down("sm")]: {
-      //   padding: theme.spacing(8, 0),
-      // },
-      // [theme.breakpoints.only("md")]: {
-      //   padding: theme.spacing(10, 1),
-      // },
+      padding: theme.spacing(10, 1),
+      [theme.breakpoints.down("sm")]: {
+        padding: theme.spacing(8, 0),
+      },
+      [theme.breakpoints.only("md")]: {
+        padding: theme.spacing(10, 1),
+      },
     },
     activeAdminCourseCnt: {
       height: "100%",
@@ -36,36 +35,48 @@ const useStyles = makeStyles((theme) => {
     },
     cardDate: {
       fontSize: 16,
-      color: "#343A40",
+      color: theme.palette.typography.darkGray,
+      // color: "red !important",
     },
-
+    gridContainer: {
+      // padding: theme.spacing(10, 1),
+      // [theme.breakpoints.down("sm")]: {
+      //   padding: theme.spacing(8, 0),
+      // },
+      // [theme.breakpoints.only("md")]: {
+      //   padding: theme.spacing(10, 1),
+      // },
+    },
     submitBtn: {
       position: "absolute",
       right: 8,
       bottom: 5,
       fontSize: 20,
       fontWeight: 700,
-      color: "#00a2e8",
+      color: theme.palette.typography.blueMedium,
     },
     cardContent: {
       position: "relative",
     },
     cardsCnt: {
-      // [theme.breakpoints.down("sm")]: {
-      //   justifyContent: "center",
-      // },
+      // display: "flex",
+      // justifyContent: "space-between",
+      // flexWrap: "wrap",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: "center",
+      },
     },
     cardData: {
-      color: "#0565d8",
+      color: theme.palette.typography.blue,
     },
     cardTitle: {
-      color: "#343A40",
+      color: theme.palette.typography.darkGray,
     },
     recentCoursesCard: {
       cursor: "pointer",
       display: "flex",
       flexDirection: "column",
-      background: "#e6e6e6",
+      background: theme.palette.background.lightGray1,
       margin: "0px 0px 50px 0px",
     },
 
@@ -74,42 +85,35 @@ const useStyles = makeStyles((theme) => {
       alignItems: "center",
       justifyContent: "center",
       flexDirection: "column",
-      // [theme.breakpoints.only("md")]: {
-      //   flexDirection: "unset",
-      //   flexWrap: "wrap",
-      // },
-      // [theme.breakpoints.down("sm")]: {
-      //   margin: "10px 10px",
-      // },
+      [theme.breakpoints.only("md")]: {
+        flexDirection: "unset",
+        flexWrap: "wrap",
+      },
+      [theme.breakpoints.down("sm")]: {
+        margin: "10px 10px",
+      },
     },
     title: {
-      color: "#FF6600",
-      background: "#faebd7",
+      color: theme.palette.typography.darkOrange,
+      background: theme.palette.background.antiwhite,
       padding: 10,
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      // [theme.breakpoints.down("sm")]: {
-      //   flexDirection: "column",
-      // },
-    },
-    noListingFound: {
-      height: 450,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+      },
     },
     select: {
       width: 280,
-      // [theme.breakpoints.down("sm")]: {
-      //   margin: "20px 0px",
-      //   width: 230,
-      // },
+      [theme.breakpoints.down("sm")]: {
+        margin: "20px 0px",
+        width: 230,
+      },
     },
 
     filters: {
-      background: "#1fbdef",
+      background: theme.palette.background.blueMediumLight,
       padding: "20px 20px",
       marginBottom: 20,
     },

@@ -3,18 +3,19 @@ import { makeStyles } from "@mui/styles";
 const drawerWidth = 240;
 const sideDrawerStyles = makeStyles((theme) => ({
   menuButton: {
-    // marginRight: theme.spacing(2),
-    marginRight: "20px",
+    marginRight: theme.spacing(2),
   },
   hide: {
     display: "none",
   },
-
+  drawer: {
+    // width: drawerWidth,
+  },
   drawerCnt: {
     width: 350,
-    // [theme.breakpoints.down("xs")]: {
-    //   width: 320,
-    // },
+    [theme.breakpoints.down("xs")]: {
+      width: 320,
+    },
   },
   drawerOpen: {
     width: drawerWidth,
@@ -29,7 +30,7 @@ const sideDrawerStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    background: "#f7f7f7",
+    background: theme.palette.background.lightGray,
     display: "flex",
     justifyContent: "flex-start",
     height: 44,
@@ -71,9 +72,9 @@ const sideDrawerStyles = makeStyles((theme) => ({
     fontSize: 16,
     fontWeight: 600,
     letterSpacing: 1,
-    // [theme.breakpoints.down("sm")]: {
-    //   fontSize: 14,
-    // },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 14,
+    },
   },
 }));
 

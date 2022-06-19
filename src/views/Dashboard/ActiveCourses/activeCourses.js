@@ -88,15 +88,23 @@ export default function ActiveCourses(props) {
       setLoading(false);
     }
   }, [selectSeason]);
-
+  const handleClick = (link, Title, Date) => {
+    if (profile.id == 2) {
+      router.push(`/dashboard/teacherslisting/${link}`);
+    } else {
+      router.push(`/dashboard/${Title}/${link}`);
+    }
+    localStorage.setItem("courseCode", Date);
+  };
   const Cards = ({ Date, Title, cardWidth, link }) => {
     return (
       <Card
-        onClick={
-          profile.id == 2
-            ? () => router.push(`/dashboard/teacherslisting/${link}`)
-            : () => router.push(`/dashboard/${Title}/${link}`)
-        }
+        onClick={() => handleClick(link, Title, Date)}
+        // onClick={
+        //   profile.id == 2
+        //     ? () => router.push(`/dashboard/teacherslisting/${link}`)
+        //     : () => router.push(`/dashboard/${Title}/${link}`)
+        // }
         sx={{ width: cardWidth }}
         className={classes.recentCoursesCard}
       >

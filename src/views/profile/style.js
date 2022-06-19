@@ -3,15 +3,14 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     profileCnt: {
-      padding: "80px 20px 30px 20px",
-      // padding: theme.spacing(8, 5),
+      padding: theme.spacing(8, 5),
 
-      // [theme.breakpoints.down("sm")]: {
-      //   padding: theme.spacing(8, 0),
-      // },
-      // [theme.breakpoints.only("md")]: {
-      //   padding: theme.spacing(8, 1),
-      // },
+      [theme.breakpoints.down("sm")]: {
+        padding: theme.spacing(8, 0),
+      },
+      [theme.breakpoints.only("md")]: {
+        padding: theme.spacing(8, 1),
+      },
     },
     gridContainer: {
       padding: "20px 0px",
@@ -20,9 +19,9 @@ const useStyles = makeStyles((theme) => {
       justifyContent: "center",
     },
     captionCnt: {
-      // [theme.breakpoints.down("sm")]: {
-      //   padding: 20,
-      // },
+      [theme.breakpoints.down("sm")]: {
+        padding: 20,
+      },
     },
     profileimgGrid: {
       display: "flex",
@@ -134,6 +133,7 @@ const useStyles = makeStyles((theme) => {
     },
     caption: {
       letterSpacing: 1,
+      // width: 500,
     },
   };
 });
