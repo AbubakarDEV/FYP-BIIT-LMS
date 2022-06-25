@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 import { getCourses, getAllCourses } from "../../../common/actions/dashboard";
 import { GETENROLLEDCOURSES, GETALLCOURSES } from "../../../common/constants";
 import Context from "../../../common/context/context";
-import ListIcon from "@mui/icons-material/List";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -88,6 +87,7 @@ export default function ActiveCourses(props) {
       setLoading(false);
     }
   }, [selectSeason]);
+
   const handleClick = (link, Title, Date) => {
     if (profile.id == 2) {
       router.push(`/dashboard/teacherslisting/${link}`);

@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import { Hidden, Paper } from "@mui/material";
 import { userLogin } from "../../common/actions/auth";
 import {
+  GETALLENROLLEDUSER,
   getErrors,
   GETPROFILE,
   MOODLEFORMAT,
@@ -20,7 +21,7 @@ import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
 import stylesObj from "./style";
 import Cookies from "js-cookie";
-import { getProfile } from "../../common/actions/dashboard";
+import { getAllUserListings, getProfile } from "../../common/actions/dashboard";
 import Context from "../../common/context/context";
 
 export default function LoginView() {
@@ -40,6 +41,23 @@ export default function LoginView() {
 
   const router = useRouter();
 
+  const getAlluser = (token) => {
+    debugger;
+
+    const request = {
+      wsfunction: GETALLENROLLEDUSER,
+      wstoken: token,
+    };
+
+    getAllUserListings(
+      request,
+      (res) => {
+        localStorage.setItem("allUsers", JSON.stringify(res.data));
+      },
+      (err) => {}
+    );
+  };
+
   const getProfiledata = (token) => {
     if (formData.username) {
       const request = {
@@ -53,6 +71,8 @@ export default function LoginView() {
       getProfile(
         request,
         (res) => {
+          getAlluser(token);
+
           dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
           router.push("/dashboard");
         },

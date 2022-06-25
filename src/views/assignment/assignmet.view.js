@@ -1,39 +1,57 @@
 import React from "react";
-import { PARTICIPANTASSIGNMENTS } from "../../common/constants";
+import { GETLATESUBMISSION } from "../../common/constants";
 import Cookies from "js-cookie";
 import { getAssignmenParticipants } from "../../common/actions/dashboard";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import useStyles from "./style";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 export default function AssignmetView() {
   const classes = useStyles();
 
-  const [responseData, setResponseData] = React.useState([]);
-  const [totalSubmitted, setTotalSubmitted] = React.useState([]);
-  const [totalNotSubmit, setTotalNotSubmit] = React.useState([]);
+  const [lateResponse, setLateResponseData] = React.useState([]);
+  const [inTimeResponse, setIntimeResponseData] = React.useState([]);
+
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     setLoading(true);
+    const allUsers = JSON.parse(localStorage.getItem("allUsers"));
+
     const request = {
-      wsfunction: PARTICIPANTASSIGNMENTS,
+      wsfunction: GETLATESUBMISSION,
       wstoken:
         localStorage.getItem("access_token") || Cookies.get("access_token"),
       assignedID: localStorage.getItem("assignmentID"),
     };
+    const timeStamp = localStorage.getItem("timeStamp", timeStamp);
+
     getAssignmenParticipants(
       request,
       (res) => {
-        setTotalSubmitted(res.data.filter((item) => item.submitted));
-        setTotalNotSubmit(res.data.filter((item) => !item.submitted));
-        setResponseData(res.data);
+        const users = res?.data?.assignments[0]?.submissions.filter(
+          (item) => item.status != "new"
+        );
+        const getIDS = users.map((item) => ({
+          id: item.userid,
+          submission: item.plugins[0].fileareas[0].files[0].timemodified,
+        }));
+
+        const lateSubmission = getIDS.map((item) =>
+          item.submission > timeStamp
+            ? { lateID: item.id }
+            : { intimeID: item.id }
+        );
+
+        const lateData = allUsers.filter(
+          (item) => item.id == lateSubmission.map((late) => late?.lateID)
+        );
+        const inTimedata = allUsers.filter(
+          (item) => item.id == lateSubmission.map((late) => late?.intimeID)
+        );
+
+        setLateResponseData(lateData);
+        setIntimeResponseData(inTimedata);
+
         setLoading(false);
       },
       (err) => {}
@@ -57,62 +75,85 @@ export default function AssignmetView() {
         </div>
       ) : (
         <>
-          <div className={classes.filter}>
-            <Typography variant="h4">
-              Total Students:{" "}
-              <span className={classes.totalLength}>{responseData.length}</span>
-            </Typography>
-            <Typography variant="h4">
-              Total Submission:{" "}
-              <span className={classes.totalLength}>
-                {totalSubmitted.length}
-              </span>
-            </Typography>
-            <Typography variant="h4">
-              Total Not Submitted:{" "}
-              <span className={classes.totalLength}>
-                {totalNotSubmit.length}
-              </span>
-            </Typography>
-          </div>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableHead style={{ background: "blue" }}>
-                <TableRow style={{ fontWeight: 800 }}>
-                  <TableCell className={classes.tableHeader} align="center">
-                    Reg NO
-                  </TableCell>
-                  <TableCell align="center" className={classes.tableHeader}>
-                    fullname
-                  </TableCell>
-                  <TableCell align="center" className={classes.tableHeader}>
-                    Section
-                  </TableCell>
-                  <TableCell align="center" className={classes.tableHeader}>
-                    Submittion Status
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {responseData.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          <Grid container>
+            <Grid item lg={6}>
+              {lateResponse.length ? (
+                <>
+                  <Typography
+                    variant="h4"
+                    style={{
+                      background: "red",
+                      padding: 20,
+                      color: "white",
+                      fontSize: 22,
+                    }}
                   >
-                    <TableCell align="center">{row.username}</TableCell>
-                    <TableCell align="center">{row.fullname}</TableCell>
-                    <TableCell align="center">{row.groups[0]?.name}</TableCell>
-                    <TableCell
-                      align="center"
-                      style={{ fontWeight: 800, fontSize: 22, color: "orange" }}
-                    >
-                      {row.submitted ? "Submitted" : "Not Submitted"}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                    Late Submission: ({lateResponse.length})
+                  </Typography>
+                  {lateResponse.map((item) => (
+                    <div style={{ padding: 20, background: "#e6ede6" }}>
+                      <Typography variant="h5">{item?.fullname}</Typography>
+                      <Typography variant="h5">{item?.email}</Typography>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 500,
+                    flexDirection: "column",
+                  }}
+                >
+                  <img src="/images/assignment.png" width={200} />
+                  <Typography variant="h4">
+                    NO Data for late submission
+                  </Typography>
+                </div>
+              )}
+            </Grid>
+            <Grid item lg={6}>
+              {inTimeResponse.length ? (
+                <>
+                  <Typography
+                    variant="h4"
+                    style={{
+                      background: "green",
+                      padding: 20,
+                      color: "white",
+                      fontSize: 22,
+                    }}
+                  >
+                    Intime Submission: ({inTimeResponse.length})
+                  </Typography>
+
+                  {inTimeResponse.map((item) => (
+                    <>
+                      <Typography>{item?.fullname}</Typography>
+                      <Typography>{item?.email}</Typography>
+                    </>
+                  ))}
+                </>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 500,
+                    flexDirection: "column",
+                  }}
+                >
+                  <img src="/images/assignment.png" width={200} />
+                  <Typography variant="h4">
+                    NO Data for In time submission
+                  </Typography>
+                </div>
+              )}
+            </Grid>
+          </Grid>
         </>
       )}
     </div>

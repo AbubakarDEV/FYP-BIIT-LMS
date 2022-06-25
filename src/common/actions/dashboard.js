@@ -13,7 +13,7 @@ export const getProfile = (request, callback, failure) => {
 };
 export const getAssignmenParticipants = (request, callback, failure) => {
   Axios.get(
-    `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&groupid=0&filter&assignid=${request.assignedID}&moodlewsrestformat=json`
+    `/webservice/rest/server.php?wstoken=${request.wstoken}&wsfunction=${request.wsfunction}&assignmentids[0]=${request.assignedID}&moodlewsrestformat=json`
   )
     .then((res) => {
       callback(res);

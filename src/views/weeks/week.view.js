@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 export default function WeekView(props) {
   const classes = useStyles();
   const router = useRouter();
-
   const { courseContent, courseName } = props;
   const [courseContentData, setCourseContent] = React.useState(courseContent);
   const [token, setToken] = React.useState();
@@ -21,10 +20,12 @@ export default function WeekView(props) {
     setToken(Cookies.get("access_token"));
   }, []);
 
-  const handleAssignmnet = (instanceID) => {
+  const handleAssignmnet = (timeStamp, instanceID) => {
+    localStorage.setItem("timeStamp", timeStamp);
     localStorage.setItem("assignmentID", instanceID);
     router.push("/dashboard/assignment");
   };
+
   return (
     <>
       <div className={classes.weeksContainer}>
@@ -91,7 +92,12 @@ export default function WeekView(props) {
                                     alignItems: "center",
                                     marginBottom: 20,
                                   }}
-                                  onClick={() => handleAssignmnet(mod.instance)}
+                                  onClick={() =>
+                                    handleAssignmnet(
+                                      mod?.dates[1]?.timestamp,
+                                      mod.instance
+                                    )
+                                  }
                                 >
                                   <img
                                     src={mod?.modicon}
