@@ -12,7 +12,7 @@ export const DIRECTORTOKEN = "5ab7106a8861cfd2a844f44d75dfcdaf";
 export const PARTICIPANTASSIGNMENTS = "mod_assign_list_participants";
 export const GETLATESUBMISSION = "mod_assign_get_submissions";
 
-export const TIMEOUT_VALUE = 60000;
+export const TIMEOUT_VALUE = 100000;
 
 export function getErrors(err) {
   const allErrors = {};

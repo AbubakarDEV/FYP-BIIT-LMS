@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     activeCourseCnt: {
-      height: "100%",
+      height: "100vh",
       padding: theme.spacing(10, 1),
       [theme.breakpoints.down("sm")]: {
         padding: theme.spacing(8, 0),
@@ -12,9 +12,7 @@ const useStyles = makeStyles((theme) => {
         padding: theme.spacing(10, 1),
       },
     },
-    activeAdminCourseCnt: {
-      height: "100%",
-    },
+    activeAdminCourseCnt: {},
     leftGrid: {
       justifyContent: "center",
       alignItems: "center",
@@ -31,22 +29,12 @@ const useStyles = makeStyles((theme) => {
     recentCoursesCard: {
       display: "flex",
       flexDirection: "row",
-      // padding: 100,
     },
     cardDate: {
       fontSize: 16,
       color: theme.palette.typography.darkGray,
-      // color: "red !important",
     },
-    gridContainer: {
-      // padding: theme.spacing(10, 1),
-      // [theme.breakpoints.down("sm")]: {
-      //   padding: theme.spacing(8, 0),
-      // },
-      // [theme.breakpoints.only("md")]: {
-      //   padding: theme.spacing(10, 1),
-      // },
-    },
+
     submitBtn: {
       position: "absolute",
       right: 8,
@@ -59,9 +47,6 @@ const useStyles = makeStyles((theme) => {
       position: "relative",
     },
     cardsCnt: {
-      // display: "flex",
-      // justifyContent: "space-between",
-      // flexWrap: "wrap",
       [theme.breakpoints.down("sm")]: {
         justifyContent: "center",
       },

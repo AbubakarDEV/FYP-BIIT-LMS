@@ -9,6 +9,7 @@ import TeacherListing from "./TeachersListing/TeacherListing";
 import ListIcon from "@mui/icons-material/List";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -36,45 +37,54 @@ function a11yProps(index) {
   };
 }
 
-export default function DashboardView() {
+export default function DashboardView(props) {
   const [value, setValue] = React.useState(0);
+  const { profileID } = props;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
     <>
-      <Box sx={{ width: "100%" }} style={{ marginTop: 80 }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="fullWidth"
-            aria-label="basic tabs example"
-          >
-            <Tab icon={<ListIcon />} label="Active Courses" {...a11yProps(0)} />
-            <Tab
-              icon={<PersonPinIcon />}
-              label="Active Students"
-              {...a11yProps(1)}
-            />
-            <Tab
-              icon={<SupervisedUserCircleIcon />}
-              label="Active Teachers"
-              {...a11yProps(2)}
-            />
-          </Tabs>
+      {profileID == 2 ? (
+        <Box sx={{ width: "100%" }} style={{ marginTop: 80 }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              aria-label="basic tabs example"
+            >
+              <Tab
+                icon={<ListIcon />}
+                label="Active Courses"
+                {...a11yProps(0)}
+              />
+              <Tab
+                icon={<PersonPinIcon />}
+                label="Active Students"
+                {...a11yProps(1)}
+              />
+              <Tab
+                icon={<SupervisedUserCircleIcon />}
+                label="Active Teachers"
+                {...a11yProps(2)}
+              />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            <ActiveCourses />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <StudentListing />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <TeacherListing />
+          </TabPanel>
         </Box>
-        <TabPanel value={value} index={0}>
-          <ActiveCourses />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <StudentListing />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <TeacherListing />
-        </TabPanel>
-      </Box>
+      ) : (
+        <ActiveCourses applyStyle={true} />
+      )}
     </>
   );
 }

@@ -27,6 +27,7 @@ export default function ActiveCourses(props) {
     setSeason(event.target.value);
     setSelectSeason(event.target.value);
   };
+
   const ContextConsumer = useContext(Context);
   const { profile, dispatchCourses } = ContextConsumer;
   useEffect(() => {
@@ -163,8 +164,8 @@ export default function ActiveCourses(props) {
               <Typography variant="h3" className={classes.title}>
                 <div>
                   {" "}
-                  <img src="/images/course.png" width={"40px"} /> Enrolled
-                  courses
+                  <img src="/images/course.png" width={"40px"} />{" "}
+                  <span className={classes.season}>{season}</span>
                 </div>
                 <span>
                   <FormControl className={classes.select}>

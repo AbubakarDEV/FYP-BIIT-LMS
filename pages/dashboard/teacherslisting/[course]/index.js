@@ -1,10 +1,11 @@
 // import React from "react";
 import Head from "next/head";
 import React from "react";
+import Footer from "../../../../src/common/components/footer/footer.cmt";
 import SideDrawer from "../../../../src/common/components/sidebarDrawer/drawer.cmt";
 import { GETALLENROLLEDUSER } from "../../../../src/common/constants";
 import { Axios } from "../../../../src/common/request";
-import TeacherlistingView from "../../../../src/views/ListingTeaccher/teacherlisting.view";
+import UserListingView from "../../../../src/views/ListingTeaccher/ListingUsers";
 
 export default function TeacherListing(props) {
   const { teacherListing } = props;
@@ -15,7 +16,8 @@ export default function TeacherListing(props) {
         <title>BIIT LMS</title>
       </Head>
       <SideDrawer />
-      <TeacherlistingView teacherListing={teacherListing} />
+      <UserListingView teacherListing={teacherListing} />
+      <Footer />
     </>
   );
 }

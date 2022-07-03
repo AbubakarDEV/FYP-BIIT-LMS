@@ -17,23 +17,26 @@ export default function TeacherListing(props) {
   const [season, setSeason] = React.useState("Spring 2021");
 
   useEffect(() => {
-    setLoading(true);
-    const request = {
-      wsfunction: GETALLENROLLEDUSER,
-      wstoken:
-        localStorage.getItem("access_token") || Cookies.get("access_token"),
-    };
+    // setLoading(true);
+    // const request = {
+    //   wsfunction: GETALLENROLLEDUSER,
+    //   wstoken:
+    //     localStorage.getItem("access_token") || Cookies.get("access_token"),
+    // };
 
-    getAllUserListings(
-      request,
-      (res) => {
-        setLoading(false);
-        setTeachers(res.data.splice(3, 37));
-      },
-      (err) => {
-        setLoading(false);
-      }
-    );
+    // getAllUserListings(
+    //   request,
+    //   (res) => {
+    //     setLoading(false);
+    //     setTeachers(res.data.splice(3, 37));
+    //   },
+    //   (err) => {
+    //     setLoading(false);
+    //   }
+    // );
+
+    const allusers = JSON.parse(localStorage.getItem("allUsers"));
+    setTeachers(allusers.splice(3, 37));
   }, []);
 
   return (
@@ -58,10 +61,8 @@ export default function TeacherListing(props) {
               <Typography variant="h3" className={classes.title}>
                 <div>
                   <img src="/images/course.png" className={classes.img} />{" "}
-                  <span className={classes.heading}>Teachers</span>
+                  <span className={classes.season}>{season}</span>
                 </div>
-
-                <span className={classes.season}>{season}</span>
                 <span className={classes.totalLength}>
                   Total Teachers: {teachers.length}
                 </span>

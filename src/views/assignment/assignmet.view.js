@@ -42,11 +42,14 @@ export default function AssignmetView() {
             : { intimeID: item.id }
         );
 
-        const lateData = allUsers.filter(
-          (item) => item.id == lateSubmission.map((late) => late?.lateID)
+        const allIdsintime = lateSubmission.map((item) => item.intimeID);
+        const allIdslate = lateSubmission.map((item) => item.lateID);
+        const inTimedata = allUsers.filter((item) =>
+          allIdsintime.includes(item.id)
         );
-        const inTimedata = allUsers.filter(
-          (item) => item.id == lateSubmission.map((late) => late?.intimeID)
+
+        const lateData = allUsers.filter((item) =>
+          allIdslate.includes(item.id)
         );
 
         setLateResponseData(lateData);
@@ -75,46 +78,8 @@ export default function AssignmetView() {
         </div>
       ) : (
         <>
-          <Grid container>
-            <Grid item lg={6}>
-              {lateResponse.length ? (
-                <>
-                  <Typography
-                    variant="h4"
-                    style={{
-                      background: "red",
-                      padding: 20,
-                      color: "white",
-                      fontSize: 22,
-                    }}
-                  >
-                    Late Submission: ({lateResponse.length})
-                  </Typography>
-                  {lateResponse.map((item) => (
-                    <div style={{ padding: 20, background: "#e6ede6" }}>
-                      <Typography variant="h5">{item?.fullname}</Typography>
-                      <Typography variant="h5">{item?.email}</Typography>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: 500,
-                    flexDirection: "column",
-                  }}
-                >
-                  <img src="/images/assignment.png" width={200} />
-                  <Typography variant="h4">
-                    NO Data for late submission
-                  </Typography>
-                </div>
-              )}
-            </Grid>
-            <Grid item lg={6}>
+          <Grid container style={{ height: "100vh" }}>
+            <Grid item lg={6} sm={12} xs={12} className={classes.inTimeCnt}>
               {inTimeResponse.length ? (
                 <>
                   <Typography
@@ -124,31 +89,73 @@ export default function AssignmetView() {
                       padding: 20,
                       color: "white",
                       fontSize: 22,
+                      // marginTop: 50,
                     }}
                   >
                     Intime Submission: ({inTimeResponse.length})
                   </Typography>
 
                   {inTimeResponse.map((item) => (
-                    <>
-                      <Typography>{item?.fullname}</Typography>
-                      <Typography>{item?.email}</Typography>
-                    </>
+                    <div
+                      style={{
+                        padding: 20,
+                        background: "#e6ede6",
+                        marginBottom: 10,
+                      }}
+                    >
+                      <Typography variant="h5">{item?.fullname}</Typography>
+                      <Typography variant="h5">{item?.email}</Typography>
+                    </div>
                   ))}
                 </>
               ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: 500,
-                    flexDirection: "column",
-                  }}
-                >
+                <div className={classes.noDataCnt}>
                   <img src="/images/assignment.png" width={200} />
-                  <Typography variant="h4">
+                  <Typography variant="h4" className={classes.noDate}>
                     NO Data for In time submission
+                  </Typography>
+                </div>
+              )}
+            </Grid>
+            <Grid
+              item
+              lg={6}
+              sm={12}
+              xs={12}
+              className={classes.lateSubmissionCnt}
+            >
+              {lateResponse.length ? (
+                <>
+                  <Typography
+                    variant="h4"
+                    style={{
+                      background: "red",
+                      padding: 20,
+                      color: "white",
+                      fontSize: 22,
+                      // marginTop: 50,
+                    }}
+                  >
+                    Late Submission: ({lateResponse.length})
+                  </Typography>
+                  {lateResponse.map((item) => (
+                    <div
+                      style={{
+                        padding: 20,
+                        background: "#e6ede6",
+                        marginBottom: 10,
+                      }}
+                    >
+                      <Typography variant="h5">{item?.fullname}</Typography>
+                      <Typography variant="h5">{item?.email}</Typography>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div className={classes.noDataCnt}>
+                  <img src="/images/assignment.png" width={200} />
+                  <Typography variant="h4" className={classes.noDate}>
+                    NO Data for late submission
                   </Typography>
                 </div>
               )}

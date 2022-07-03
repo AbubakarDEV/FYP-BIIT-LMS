@@ -42,8 +42,6 @@ export default function LoginView() {
   const router = useRouter();
 
   const getAlluser = (token) => {
-    debugger;
-
     const request = {
       wsfunction: GETALLENROLLEDUSER,
       wstoken: token,
