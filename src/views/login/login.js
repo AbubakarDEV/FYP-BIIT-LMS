@@ -107,6 +107,11 @@ function LoginView() {
                 request,
                 (res) => {
                   localStorage.setItem("prfileID", res?.data[0]?.id);
+                  localStorage.setItem(
+                    "profileData",
+                    JSON.stringify(res?.data[0])
+                  );
+
                   dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
                   router.push("/dashboard");
                 },

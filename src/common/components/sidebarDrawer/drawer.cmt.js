@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -10,11 +10,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import sideDrawerStyles from "./style";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import Avatar from "@mui/material/Avatar";
 import Context from "../../context/context";
+import styles from "./drawer.module.css";
 
 const drawerWidth = 240;
 
@@ -37,11 +37,10 @@ const AppBar = styled(MuiAppBar, {
 
 export default function SideDrawer() {
   const [open, setOpen] = React.useState(false);
-  const classes = sideDrawerStyles();
   const router = useRouter();
 
   const ContextConsumer = useContext(Context);
-  const { profile, dispatch } = ContextConsumer;
+  const { dispatch } = ContextConsumer;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,14 +66,21 @@ export default function SideDrawer() {
     return (
       <ListItem
         button
-        className={classes.listItem}
+        className={styles.listItem}
         onClick={(e) => handleItemClick(e, path)}
       >
-        <ListItemIcon className={classes.listItemIcon}>{children}</ListItemIcon>
+        <ListItemIcon className={styles.listItemIcon}>{children}</ListItemIcon>
         <ListItemText primary={text} />
       </ListItem>
     );
   };
+
+  const [responseData, setResponseData] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("profileData"));
+    setResponseData(data);
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -89,19 +95,19 @@ export default function SideDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <div className={classes.appBarCnt}>
+          <div className={styles.appBarCnt}>
             <Typography variant="h6" noWrap component="div">
               BIIT LMS
             </Typography>
             <div style={{ display: "flex", alignItems: "center" }}>
-              {profile?.fullname && (
-                <Typography variant="body1" className={classes.username}>
-                  {profile?.fullname}
+              {responseData?.fullname && (
+                <Typography variant="body1" className={styles.username}>
+                  {responseData?.fullname}
                 </Typography>
               )}
               <Avatar
                 alt="Remy Sharp"
-                src={profile?.profileimageurlsmall || "/images/user.png"}
+                src={responseData?.profileimageurlsmall || "/images/user.png"}
               />
             </div>
           </div>
@@ -125,10 +131,7 @@ export default function SideDrawer() {
             position: "relative",
           }}
         >
-          <CloseIcon
-            onClick={handleDrawerClose}
-            className={classes.closeIcon}
-          />
+          <CloseIcon onClick={handleDrawerClose} className={styles.closeIcon} />
         </div>
         <Item text="Dashboard" path="/dashboard">
           <img src="/images/dashboard.png" style={{ width: 25 }} />
@@ -145,8 +148,8 @@ export default function SideDrawer() {
         {/* <Item text="Logout" path="/login">
           
         </Item> */}
-        <ListItem button className={classes.listItem} onClick={handleLogout}>
-          <ListItemIcon className={classes.listItemIcon}>
+        <ListItem button className={styles.listItem} onClick={handleLogout}>
+          <ListItemIcon className={styles.listItemIcon}>
             <img src="/images/logout.png" style={{ width: 25 }} />
           </ListItemIcon>
           <ListItemText primary={"Logout"} />

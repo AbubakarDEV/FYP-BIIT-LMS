@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useStyles from "./style";
+// import useClasses from "./style";
 import { Divider, Grid, Typography } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -12,8 +12,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+import styles from "./studentListing.module.css";
+
 export default function TeacherListing() {
-  const classes = useStyles();
+  // const styles = useStyles();
   const router = useRouter();
   const [students, setStudents] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -37,7 +40,7 @@ export default function TeacherListing() {
       (res) => {
         setLoading(false);
         if (selectSeason == "Spring 2021") {
-          setStudents(res.data.splice(341, 1737));
+          setStudents(res.data.splice(341, 500));
         } else {
           setStudents(res.data.splice(40, 341));
         }
@@ -69,13 +72,13 @@ export default function TeacherListing() {
             <>
               {students.length > 0 ? (
                 <>
-                  <Typography variant="h3" className={classes.title}>
+                  <Typography variant="h3" className={styles.title}>
                     <div>
                       <img src="/images/course.png" width={"40px"} />
-                      <span className={classes.season}>{season}</span>
+                      <span className={styles.season}>{season}</span>
                     </div>
                     <span>
-                      <FormControl className={classes.select}>
+                      <FormControl className={styles.select}>
                         <InputLabel>Select Season</InputLabel>
                         <Select
                           labelId="demo-simple-select-label"
@@ -98,13 +101,13 @@ export default function TeacherListing() {
                           <div style={{ marginBottom: 20 }}>
                             <Typography
                               variant="h3"
-                              className={classes.teacherName}
+                              className={styles.teacherName}
                             >
                               {item.fullname}
                             </Typography>
                             <Typography
                               variant="Body1"
-                              className={classes.courseName}
+                              className={styles.courseName}
                             >
                               Email:
                             </Typography>
@@ -113,12 +116,12 @@ export default function TeacherListing() {
                                 icon={<EmailIcon />}
                                 label={item.email}
                                 color="success"
-                                className={classes.chip}
+                                className={styles.chip}
                               />
                             </Stack>
                             <Typography
                               variant="Body1"
-                              className={classes.courseName}
+                              className={styles.courseName}
                             >
                               Courses:
                             </Typography>
@@ -136,7 +139,7 @@ export default function TeacherListing() {
                                     }
                                     label={course.fullname}
                                     color="success"
-                                    className={classes.chip}
+                                    className={styles.chip}
                                   />
                                 </Stack>
                               ))}
@@ -145,7 +148,7 @@ export default function TeacherListing() {
                               <>
                                 <Typography
                                   variant="Body1"
-                                  className={classes.courseName}
+                                  className={styles.courseName}
                                 >
                                   Sections:
                                 </Typography>
@@ -161,7 +164,7 @@ export default function TeacherListing() {
                                         variant="outlined"
                                         label={sections.name}
                                         color="success"
-                                        className={classes.chip}
+                                        className={styles.chip}
                                       />
                                     </Stack>
                                   ))}
@@ -176,7 +179,7 @@ export default function TeacherListing() {
                   </Grid>
                 </>
               ) : (
-                <div className={classes.noListingFound}>
+                <div className={styles.noListingFound}>
                   <img src="/images/book.png" width={"100px"} />
                   <Typography variant="h3"> No Listing found</Typography>
                 </div>

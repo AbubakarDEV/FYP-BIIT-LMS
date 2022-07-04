@@ -1,0 +1,52 @@
+
+    .assignmnetContainer{
+      height: 100vh;
+      padding: 70px 0px;
+      
+    }
+    .filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      background: orange;
+      padding: 20px 0px;
+    }
+
+    .tableHeader {
+      font-weight: 800;
+      font-size: 20px;
+      color: white;
+    }
+
+    .totalLength {
+      font-size: 25px;
+      font-weight: 900;
+      color: white;
+    }
+    .lateSubmissionCnt {
+      background: red;
+    
+    }
+    .noDate {
+      color: white;
+    }
+    .inTimeCnt {
+      background: green;
+     
+    }
+    .noDataCnt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 650px;
+      flex-direction: column;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+      .assignmnetContainer{
+        padding: 60px 0px;
+        
+      }
+      
+    }

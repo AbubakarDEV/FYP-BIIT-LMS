@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import useStyles from "./style";
+
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { Grid, Paper } from "@mui/material";
@@ -7,9 +7,9 @@ import { useDropzone } from "react-dropzone";
 import Divider from "@mui/material/Divider";
 import Footer from "../../common/components/footer/footer.cmt";
 import Context from "../../common/context/context";
+import styles from "./profile.module.css";
 
 export default function ProfileView() {
-  const classes = useStyles();
   const [image, setImage] = useState("/images/book.png");
   const [isImgLoading, setIsImgLoading] = useState(false);
 
@@ -35,29 +35,29 @@ export default function ProfileView() {
   });
   return (
     <>
-      <div className={classes.profileCnt}>
-        <div className={classes.captionCnt}>
+      <div className={styles.profileCnt}>
+        <div className={styles.captionCnt}>
           <Typography variant="h3">General Profile Setting</Typography>
-          <Typography variant="body1" className={classes.caption}>
+          <Typography variant="body1" className={styles.caption}>
             General Profile allows to you to change your profile picture and
             adjust your account and password information
           </Typography>
         </div>
         <Divider />
 
-        <Grid container className={classes.gridContainer}>
+        <Grid container className={styles.gridContainer}>
           <Grid
             item
             xs={12}
             sm={12}
             md={6}
             lg={4}
-            className={classes.profileimgGrid}
+            className={styles.profileimgGrid}
           >
             <img
               src={profile?.profileimageurlsmall || "/images/logoimg.jpg"}
               alt="galleryImg"
-              className={classes.galleryImg}
+              className={styles.galleryImg}
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = image;
@@ -65,24 +65,24 @@ export default function ProfileView() {
             />
           </Grid>
 
-          <Grid lg={7} sm={12} md={6} item className={classes.textfieldGrid}>
+          <Grid lg={7} sm={12} md={6} item className={styles.textfieldGrid}>
             <Typography variant="h4">Update Profile</Typography>
 
             <TextField
-              className={classes.emailTextfield}
+              className={styles.emailTextfield}
               id="outlined-required"
               placeholder="Email"
               label="Email"
               defaultValue={profile?.email}
             />
             <TextField
-              className={classes.emailTextfield}
+              className={styles.emailTextfield}
               id="outlined-required"
               label="Username"
               defaultValue={profile?.username}
             />
             <TextField
-              className={classes.emailTextfield}
+              className={styles.emailTextfield}
               label="Country"
               defaultValue="Pakistan"
             />

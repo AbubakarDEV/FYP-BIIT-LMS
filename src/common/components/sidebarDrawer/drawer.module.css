@@ -1,0 +1,54 @@
+
+  .drawerOpen {
+    width: 240px;
+    top: 77px;
+  }
+  .drawerClose {
+    top: 77px;
+    overflow-x: hidden;
+    width: 65px;
+    /* "& $listItemIcon": {
+      min-width: 52;
+    }, */
+  }
+  .toolbar {
+    background: #f7f7f7;
+    display: flex;
+    justify-content: flex-start;
+    height: 44px;
+    align-items: center;
+    width: 100%;
+  }
+  
+  
+  .listItem {
+    padding: 10px 16px;
+  }
+  .listItemIcon {
+    min-width: 56px;
+  }
+  .closeIcon {
+    font-size: 40px;
+    position: absolute;
+    right: 0px;
+    background: lightgray;
+    padding: 4px;
+    cursor: pointer;
+  }
+  .appBarCnt {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+  .username {
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    /* [theme.breakpoints.down("sm")]: {
+      font-size: 14;
+    }, */
+  }
+

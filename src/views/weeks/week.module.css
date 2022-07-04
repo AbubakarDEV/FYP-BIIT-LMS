@@ -1,0 +1,39 @@
+
+    .weeksContainer {
+      margin: 100px 10px 0px 10px;
+    }
+    
+    .weekCnt {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .folderImg {
+      width: 40px;
+      margin-right: 20px;
+    }
+
+    .heading {
+      margin: 0px;
+      font-size: 30px;
+      margin-bottom: 20px;
+      /* [theme.breakpoints.down("sm")]: {
+        fontSize: 20,
+      }, */
+    }
+    
+    .assignmentCnt {
+      margin-left: 40px;
+      background: red;
+    }
+
+    .mid {
+      background: #00a2e8;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin: 0px;
+      padding: 10px;
+      color: #343A40
+    }
+

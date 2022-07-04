@@ -1,7 +1,7 @@
 // import React from "react";
 import Head from "next/head";
 import React from "react";
-import WeekView from "../../../../src/views/weeks/week.view";
+import WeekView from "../../../../src/views/weeks/week";
 import SideDrawer from "../../../../src/common/components/sidebarDrawer/drawer.cmt";
 import { Axios } from "../../../../src/common/request";
 import { COURSECONTENT } from "../../../../src/common/constants";

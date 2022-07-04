@@ -1,13 +1,12 @@
 // @flow
 import React from "react";
-import AccrodianStyles from "./styles";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import styles from "./Accordian.module.css";
 
 export default function CustomAccordian(props) {
-  const classes = AccrodianStyles();
   const {
     titleElement,
     content,
@@ -18,17 +17,17 @@ export default function CustomAccordian(props) {
     ...rest
   } = props;
   return (
-    <MuiAccordion className={classes.container} {...rest}>
+    <MuiAccordion className={styles.container} {...rest}>
       <MuiAccordionSummary
         expandIcon={
           icon || <ArrowForwardIosSharpIcon style={{ color: "white" }} />
         }
-        className={classes.summary}
+        className={styles.summary}
         {...SummaryStyles}
       >
         Week {titleElement} - {date}
       </MuiAccordionSummary>
-      <MuiAccordionDetails className={classes.content} {...ContentStyles}>
+      <MuiAccordionDetails className={styles.content} {...ContentStyles}>
         {content}
       </MuiAccordionDetails>
     </MuiAccordion>

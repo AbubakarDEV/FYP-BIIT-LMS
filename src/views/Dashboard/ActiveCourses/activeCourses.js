@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import useStyles from "./style";
+// import useStyles from "./style";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import Card from "@mui/material/Card";
@@ -15,9 +15,11 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import styles from "./activeCourses.module.css";
+
 export default function ActiveCourses(props) {
   const { applyStyle } = props;
-  const classes = useStyles();
+  // const styles = useStyles();
   const router = useRouter();
   const [courses, setCourses] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -126,7 +128,7 @@ export default function ActiveCourses(props) {
         //     : () => router.push(`/dashboard/${Title}/${link}`)
         // }
         sx={{ width: cardWidth }}
-        className={classes.recentCoursesCard}
+        className={styles.recentCoursesCard}
       >
         <CardMedia
           component="img"
@@ -134,9 +136,9 @@ export default function ActiveCourses(props) {
           image="/images/cardimg3.jpg"
           alt="green iguana"
         />
-        <CardContent className={classes.cardContent}>
+        <CardContent className={styles.cardContent}>
           <Typography
-            className={classes.cardData}
+            className={styles.cardData}
             gutterBottom
             variant="h5"
             component="div"
@@ -144,7 +146,7 @@ export default function ActiveCourses(props) {
             {Date}
           </Typography>
           <Typography
-            className={classes.cardTitle}
+            className={styles.cardTitle}
             variant="h4"
             color="text.secondary"
           >
@@ -183,18 +185,18 @@ export default function ActiveCourses(props) {
             <div
               className={
                 applyStyle
-                  ? classes.activeCourseCnt
-                  : classes.activeAdminCourseCnt
+                  ? styles.activeCourseCnt
+                  : styles.activeAdminCourseCnt
               }
             >
-              <Typography variant="h3" className={classes.title}>
+              <Typography variant="h3" className={styles.title}>
                 <div>
                   {" "}
                   <img src="/images/course.png" width={"40px"} />{" "}
-                  <span className={classes.season}>{season}</span>
+                  <span className={styles.season}>{season}</span>
                 </div>
                 <span>
-                  <FormControl className={classes.select}>
+                  <FormControl className={styles.select}>
                     <InputLabel>Select Season</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
@@ -210,7 +212,7 @@ export default function ActiveCourses(props) {
                 <spam>Total Courses:{courses.length}</spam>
               </Typography>
 
-              <Grid container spacing={5} className={classes.gridContainer}>
+              <Grid container spacing={5} className={styles.gridContainer}>
                 <>
                   {filteredData?.map((item) => (
                     <Grid
@@ -219,7 +221,7 @@ export default function ActiveCourses(props) {
                       sm={6}
                       lg={3}
                       md={4}
-                      className={classes.leftGrid}
+                      className={styles.leftGrid}
                     >
                       <Cards
                         cardWidth={250}
@@ -237,7 +239,7 @@ export default function ActiveCourses(props) {
           ) : (
             <>
               {loading && (
-                <div className={classes.noListingFound}>
+                <div className={styles.noListingFound}>
                   <img src="/images/book.png" width={"100px"} />
                   <Typography variant="h3"> No Listing found</Typography>
                 </div>

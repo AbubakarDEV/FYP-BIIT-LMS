@@ -1,0 +1,94 @@
+
+    .activeCourseCnt {
+      min-height: 670px;
+      margin-top: 80px;
+    }
+    .leftGrid {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+    .recentCourses {
+      height: 150px;
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .recentCoursesCard {
+      display: "flex";
+      flex-direction: "row";
+    }
+
+    .cardDate {
+      font-size: 16px;
+      color: #343A40;
+    }
+    
+    .cardData {
+      color: #0565d8;
+    }
+
+    .cardTitle {
+      color: #343A40;
+    }
+
+    .recentCoursesCard {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      background: #e6e6e6;
+      margin: 0px 0px 50px 0px;
+    }
+
+    
+    .title {
+      color: #FF6600;
+      background: #faebd7;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+     
+    }
+
+    .select{
+      width: 280px;
+      
+    }
+
+    .filters {
+      background:#1fbdef;
+      padding: 20px 20px;
+      margin-bottom: 20px;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+      .select{
+          margin: 20px 0px;
+          width: 230px;
+      }
+      .title {
+          flex-direction: column;
+      }
+      .timeline {
+          margin: 10px 10px;
+      }
+      .cardsCnt {
+          justify-content: center;
+        
+      }
+      
+    }
+    
+    @media only screen and (max-width: 1200px) {
+      .timeline {
+          flex-direction: unset;
+          flex-wrap: wrap;
+        
+      }
+    }
+

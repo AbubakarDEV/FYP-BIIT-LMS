@@ -2,12 +2,10 @@ import React from "react";
 import { GETLATESUBMISSION } from "../../common/constants";
 import Cookies from "js-cookie";
 import { getAssignmenParticipants } from "../../common/actions/dashboard";
-import useStyles from "./style";
 import { Grid, Typography } from "@mui/material";
+import styles from "./assignment.module.css";
 
 export default function AssignmetView() {
-  const classes = useStyles();
-
   const [lateResponse, setLateResponseData] = React.useState([]);
   const [inTimeResponse, setIntimeResponseData] = React.useState([]);
 
@@ -62,7 +60,7 @@ export default function AssignmetView() {
   }, []);
 
   return (
-    <div className={classes.assignmnetContainer}>
+    <div className={styles.assignmnetContainer}>
       {loading ? (
         <div
           style={{
@@ -79,7 +77,7 @@ export default function AssignmetView() {
       ) : (
         <>
           <Grid container style={{ height: "100vh" }}>
-            <Grid item lg={6} sm={12} xs={12} className={classes.inTimeCnt}>
+            <Grid item lg={6} sm={12} xs={12} className={styles.inTimeCnt}>
               {inTimeResponse.length ? (
                 <>
                   <Typography
@@ -109,9 +107,9 @@ export default function AssignmetView() {
                   ))}
                 </>
               ) : (
-                <div className={classes.noDataCnt}>
+                <div className={styles.noDataCnt}>
                   <img src="/images/assignment.png" width={200} />
-                  <Typography variant="h4" className={classes.noDate}>
+                  <Typography variant="h4" className={styles.noDate}>
                     NO Data for In time submission
                   </Typography>
                 </div>
@@ -122,7 +120,7 @@ export default function AssignmetView() {
               lg={6}
               sm={12}
               xs={12}
-              className={classes.lateSubmissionCnt}
+              className={styles.lateSubmissionCnt}
             >
               {lateResponse.length ? (
                 <>
@@ -152,9 +150,9 @@ export default function AssignmetView() {
                   ))}
                 </>
               ) : (
-                <div className={classes.noDataCnt}>
+                <div className={styles.noDataCnt}>
                   <img src="/images/assignment.png" width={200} />
-                  <Typography variant="h4" className={classes.noDate}>
+                  <Typography variant="h4" className={styles.noDate}>
                     NO Data for late submission
                   </Typography>
                 </div>

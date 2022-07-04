@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import useStyles from "./style";
 import { Divider, Grid, Typography } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import EmailIcon from "@mui/icons-material/Email";
 import { useRouter } from "next/router";
+import styles from "./TeacherListing.module.css";
 
 export default function TeacherListing(props) {
-  const classes = useStyles();
   const router = useRouter();
   const [teachers, setTeachers] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -39,12 +38,12 @@ export default function TeacherListing(props) {
         <>
           {teachers.length > 0 ? (
             <>
-              <Typography variant="h3" className={classes.title}>
+              <Typography variant="h3" className={styles.title}>
                 <div>
-                  <img src="/images/course.png" className={classes.img} />{" "}
-                  <span className={classes.season}>{season}</span>
+                  <img src="/images/course.png" className={styles.img} />{" "}
+                  <span className={styles.season}>{season}</span>
                 </div>
-                <span className={classes.totalLength}>
+                <span className={styles.totalLength}>
                   Total Teachers: {teachers.length}
                 </span>
               </Typography>
@@ -54,15 +53,12 @@ export default function TeacherListing(props) {
                   <>
                     <Grid item xs={12}>
                       <div style={{ marginBottom: 20 }}>
-                        <Typography
-                          variant="h3"
-                          className={classes.teacherName}
-                        >
+                        <Typography variant="h3" className={styles.teacherName}>
                           {item.fullname}
                         </Typography>
                         <Typography
                           variant="Body1"
-                          className={classes.courseName}
+                          className={styles.courseName}
                         >
                           Email:
                         </Typography>
@@ -71,12 +67,12 @@ export default function TeacherListing(props) {
                             icon={<EmailIcon />}
                             label={item.email}
                             color="success"
-                            className={classes.chip}
+                            className={styles.chip}
                           />
                         </Stack>
                         <Typography
                           variant="Body1"
-                          className={classes.courseName}
+                          className={styles.courseName}
                         >
                           Courses:
                         </Typography>
@@ -91,7 +87,7 @@ export default function TeacherListing(props) {
                                 }
                                 label={course.fullname}
                                 color="success"
-                                className={classes.chip}
+                                className={styles.chip}
                               />
                             </Stack>
                           ))}
@@ -100,7 +96,7 @@ export default function TeacherListing(props) {
                           <>
                             <Typography
                               variant="Body1"
-                              className={classes.courseName}
+                              className={styles.courseName}
                             >
                               Sections:
                             </Typography>
@@ -114,7 +110,7 @@ export default function TeacherListing(props) {
                                     variant="outlined"
                                     label={sections.name}
                                     color="success"
-                                    className={classes.chip}
+                                    className={styles.chip}
                                   />
                                 </Stack>
                               ))}
@@ -129,7 +125,7 @@ export default function TeacherListing(props) {
               </Grid>
             </>
           ) : (
-            <div className={classes.noListingFound}>
+            <div className={styles.noListingFound}>
               <img src="/images/book.png" width={"100px"} />
               <Typography variant="h3"> No Listing found</Typography>
             </div>

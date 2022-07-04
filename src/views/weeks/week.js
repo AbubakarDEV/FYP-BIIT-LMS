@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import useStyles from "./style";
 import Typography from "@mui/material/Typography";
 import Footer from "../../common/components/footer/footer.cmt";
 import CustomAccordian from "../../common/components/accordian/Accordian";
 import Cookies from "js-cookie";
 import { DIRECTORTOKEN } from "../../common/constants";
 import { useRouter } from "next/router";
+import styles from "./week.module.css";
 
 export default function WeekView(props) {
-  const classes = useStyles();
   const router = useRouter();
   const { courseContent, courseName } = props;
   const [courseContentData, setCourseContent] = React.useState(courseContent);
@@ -27,8 +26,8 @@ export default function WeekView(props) {
 
   return (
     <>
-      <div className={classes.weeksContainer}>
-        <Typography variant="h2" className={classes.heading}>
+      <div className={styles.weeksContainer}>
+        <Typography variant="h2" className={styles.heading}>
           {courseName}
         </Typography>
 
@@ -44,7 +43,7 @@ export default function WeekView(props) {
                   content={
                     <>
                       {item.modules.length > 0 ? (
-                        <div className={classes.optionsCnt}>
+                        <div className={styles.optionsCnt}>
                           {item.modules.map((mod, index) => (
                             <>
                               {mod?.modplural != "Assignments" ? (
@@ -142,7 +141,7 @@ export default function WeekView(props) {
                   content={
                     <>
                       {item.modules.length > 0 ? (
-                        <div className={classes.optionsCnt}>
+                        <div className={styles.optionsCnt}>
                           {item.modules.map((mod, index) => (
                             <>
                               <a

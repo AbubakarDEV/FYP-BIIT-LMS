@@ -1,25 +1,30 @@
-import React, { useContext } from "react";
-import useStyles from "./style";
+import React, { useContext, useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Context from "../../context/context";
+import styles from "./footer.module.css";
 
 export default function Footer() {
-  const classes = useStyles();
-  const ContextConsumer = useContext(Context);
-  const { profile } = ContextConsumer;
+  // const ContextConsumer = useContext(Context);
+  // const { profile } = ContextConsumer;
+  const [responseData, setResponseData] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("profileData"));
+    setResponseData(data);
+  }, []);
 
   return (
-    <div className={classes.footerCnt}>
-      <Typography variant="body1" className={classes.heading}>
-        You are logged in as {profile?.fullname}
+    <div className={styles.footerCnt}>
+      <Typography variant="body1" className={styles.heading}>
+        You are logged in as {responseData?.fullname}
       </Typography>
-      <Typography variant="body1" className={classes.heading}>
+      <Typography variant="body1" className={styles.heading}>
         Copyright @ BIIT
       </Typography>
-      {/* <Typography className={classes.heading}>Dashboard</Typography>
-      <Typography className={classes.heading}>Courses</Typography>
-      <Typography className={classes.heading}>Profile</Typography>
-      <Typography className={classes.heading}>Get the mobile app</Typography> */}
+      {/* <Typography className={styles.heading}>Dashboard</Typography>
+      <Typography className={styles.heading}>Courses</Typography>
+      <Typography className={styles.heading}>Profile</Typography>
+      <Typography className={styles.heading}>Get the mobile app</Typography> */}
     </div>
   );
 }
