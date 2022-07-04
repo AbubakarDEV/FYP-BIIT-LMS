@@ -86,32 +86,6 @@ export default function ProfileView() {
               label="Country"
               defaultValue="Pakistan"
             />
-
-            <Divider />
-            <div
-              style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Typography variant="h4" className={classes.changePassword}>
-                Change Password
-              </Typography>
-              <TextField
-                className={classes.emailTextfield}
-                label="Current Password"
-                defaultValue="********"
-              />
-              <TextField
-                className={classes.emailTextfield}
-                label="New Password"
-                defaultValue=""
-              />
-              {/* <Button variant="contained" className={classes.passwordBtn}>
-                Update Password
-              </Button> */}
-            </div>
           </Grid>
         </Grid>
       </div>

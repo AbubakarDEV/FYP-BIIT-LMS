@@ -1,62 +1,77 @@
-import React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import ListIcon from "@mui/icons-material/List";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
 import StudentlistingView from "../listingStudent/studentlisting.view";
 import TeacherlistingView from "../listingTeacher/teacherlisting.view";
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledbiy={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
 
 export default function UserListingView(props) {
-  const [value, setValue] = React.useState(0);
   const { teacherListing } = props;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [teacherListings, setTeacherListings] = useState(teacherListing);
+  const [loading, setLoading] = React.useState(false);
+  const [studentListings, setStudentListings] = useState(teacherListing);
+  const [value, setValue] = React.useState("students");
+
+  const handleChange = (event) => {
+    setLoading(true);
+
+    setValue(event.target.value);
+    setLoading(false);
   };
+  useEffect(() => {
+    setLoading(true);
+    setTeacherListings(
+      teacherListing.filter(
+        (item) => item?.roles[0]?.shortname == "editingteacher"
+      )
+    );
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    setStudentListings(
+      studentListings.filter(
+        (item) => item?.roles[0]?.shortname != "editingteacher"
+      )
+    );
+    setLoading(false);
+  }, []);
+
   return (
     <>
-      <Box sx={{ width: "100%" }} style={{ marginTop: 80 }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange} variant="fullWidth">
-            <Tab icon={<ListIcon />} label="Students" {...a11yProps(0)} />
-            <Tab icon={<PersonPinIcon />} label="Teachers" {...a11yProps(1)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          <StudentlistingView teacherListing={teacherListing} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TeacherlistingView teacherListing={teacherListing} />
-        </TabPanel>
+      <Box style={{ marginTop: 80, padding: "0px 10px" }}>
+        <FormControl style={{ display: "flex" }}>
+          <RadioGroup value={value} onChange={handleChange}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FormControlLabel
+                value="students"
+                control={<Radio />}
+                label="Students"
+                size="small"
+              />
+              <FormControlLabel
+                value="teachers"
+                control={<Radio />}
+                label="teachers"
+              />
+            </div>
+          </RadioGroup>
+        </FormControl>
+        {value == "students" ? (
+          <StudentlistingView studentListing={studentListings} />
+        ) : (
+          <TeacherlistingView teacherListing={teacherListings} />
+        )}
       </Box>
     </>
   );

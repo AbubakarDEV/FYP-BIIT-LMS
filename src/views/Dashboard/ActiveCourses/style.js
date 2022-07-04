@@ -3,7 +3,8 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     activeCourseCnt: {
-      height: "100vh",
+      minHeight: "670px",
+
       padding: theme.spacing(10, 1),
       [theme.breakpoints.down("sm")]: {
         padding: theme.spacing(8, 0),

@@ -32,15 +32,6 @@ export default function TeacherListing() {
         localStorage.getItem("access_token") || Cookies.get("access_token"),
     };
 
-    // const allusers = JSON.parse(localStorage.getItem("allUsers"));
-    // // allusers = JSON.parse(allusers);
-    // if (selectSeason == "Spring 2021") {
-    //   setStudents(allusers.splice(341, 1737));
-    //   setLoading(false);
-    // } else {
-    //   setStudents(allusers.splice(40, 341));
-    //   setLoading(false);
-    // }
     getAllUserListings(
       request,
       (res) => {

@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import { Hidden, Paper } from "@mui/material";
 import { userLogin } from "../../common/actions/auth";
 import {
+  DIRECTORTOKEN,
   GETALLENROLLEDUSER,
   getErrors,
   GETPROFILE,
@@ -19,13 +20,11 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
-import stylesObj from "./style";
-import Cookies from "js-cookie";
 import { getAllUserListings, getProfile } from "../../common/actions/dashboard";
 import Context from "../../common/context/context";
+import styles from "./login.module.css";
 
-export default function LoginView() {
-  const classes = stylesObj();
+function LoginView() {
   const [formData, setData] = useState({
     username: "",
     password: "",
@@ -56,28 +55,28 @@ export default function LoginView() {
     );
   };
 
-  const getProfiledata = (token) => {
-    if (formData.username) {
-      const request = {
-        username: formData.username,
-        wsfunction: GETPROFILE,
-        wstoken:
-          localStorage.getItem("access_token") ||
-          Cookies.get("access_token") ||
-          token,
-      };
-      getProfile(
-        request,
-        (res) => {
-          getAlluser(token);
-
-          dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
-          router.push("/dashboard");
-        },
-        (err) => {}
-      );
-    }
-  };
+  // const getProfiledata = (token) => {
+  //   if (formData.username) {
+  //     const request = {
+  //       username: formData.username,
+  //       wsfunction: GETPROFILE,
+  //       wstoken:
+  //         localStorage.getItem("access_token") ||
+  //         Cookies.get("access_token") ||
+  //         token,
+  //     };
+  //     getProfile(
+  //       request,
+  //       (res) => {
+  //         localStorage.setItem("prfileID", res?.data[0]?.id);
+  //         dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
+  //         router.push("/dashboard");
+  //         // getAlluser(token);
+  //       },
+  //       (err) => {}
+  //     );
+  //   }
+  // };
 
   const handleSubmit = async (data) => {
     setResponseErrors("");
@@ -94,9 +93,25 @@ export default function LoginView() {
           request,
           (res) => {
             if (res?.data?.token) {
-              getProfiledata(res?.data?.token);
+              getAlluser(res.data.token);
+
               localStorage.setItem("access_token", res?.data?.token);
               document.cookie = `access_token=${res?.data?.token}; path=/`;
+              const request = {
+                username: formData.username,
+                wsfunction: GETPROFILE,
+                wstoken:
+                  res?.data?.token || localStorage.getItem("access_token"),
+              };
+              getProfile(
+                request,
+                (res) => {
+                  localStorage.setItem("prfileID", res?.data[0]?.id);
+                  dispatch({ type: "UPDATE_PROFILE", value: res?.data[0] });
+                  router.push("/dashboard");
+                },
+                (err) => {}
+              );
             }
             if (res?.data?.error) {
               setResponseErrors(res?.data?.error);
@@ -135,23 +150,23 @@ export default function LoginView() {
 
   return (
     <div>
-      <Grid container className={classes.loginWrapper}>
+      <Grid container className={styles.loginWrapper}>
         <Hidden only={["sm", "xs"]}>
-          <Grid item className={classes.gridCntLeft} xs={12} lg={6} md={6}>
-            <Paper className={classes.leftGrid}>
+          <Grid item className={styles.gridCntLeft} xs={12} lg={6} md={6}>
+            <Paper className={styles.leftGrid}>
               <img
                 alt="logo"
-                className={classes.leftGridImg}
+                className={styles.leftGridImg}
                 src="./images/logoimg.jpg"
               />
             </Paper>
           </Grid>
         </Hidden>
-        <Grid item xs={12} lg={6} md={6} className={classes.gridCntRight}>
-          <div className={classes.rightGrid}>
+        <Grid item xs={12} lg={6} md={6} className={styles.gridCntRight}>
+          <div className={styles.rightGrid}>
             <img
               alt="logo"
-              className={classes.logoImg}
+              className={styles.logoImg}
               src="./images/biitlogo.png"
             />
             <Typography variant="h3" align="center">
@@ -160,14 +175,14 @@ export default function LoginView() {
             <Typography
               variant="h6"
               align="center"
-              className={classes.welcomeBack}
+              className={styles.welcomeBack}
             >
               Welcome Back! You have been Missed
             </Typography>
-            <div className={classes.inputCnt}>
+            <div className={styles.inputCnt}>
               <TextField
                 id="outlined-required"
-                className={classes.username}
+                className={styles.username}
                 label="Enter Username"
                 name="username"
                 value={formData.username}
@@ -177,7 +192,7 @@ export default function LoginView() {
               />
               <TextField
                 id="outlined-required"
-                className={classes.password}
+                className={styles.password}
                 label="Enter Password"
                 name="password"
                 value={formData.password}
@@ -212,7 +227,7 @@ export default function LoginView() {
               <Button
                 variant="contained"
                 onClick={handleSubmit}
-                className={classes.loginBtn}
+                className={styles.loginBtn}
               >
                 Log in
               </Button>
@@ -223,3 +238,5 @@ export default function LoginView() {
     </div>
   );
 }
+
+export default LoginView;

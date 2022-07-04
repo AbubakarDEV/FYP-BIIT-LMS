@@ -1,0 +1,112 @@
+
+
+.loginWrapper {
+  height: 100vh
+}
+
+.leftGridImg {
+  width: 550px;
+  height: 100%;
+}
+
+.title {
+  margin: auto;
+}
+
+.logoImg {
+  width: 200px;
+}
+
+.gridCntRight {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+.gridCntLeft {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #00a2e8
+}
+
+
+.inputCnt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.username {
+  width: 350px;
+  margin-bottom: 20px;
+
+  
+}
+
+
+.password {
+  width: 350px;
+  margin-bottom: 20px;
+}
+
+.loginBtn {
+  width: 350px;
+  margin-top: 20px;
+  background: #00a2e8
+  
+}
+
+.rememberUsername {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.welcomeBack {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.rightGrid {
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 1px 1px 1px 3px rgba(0,0,0,0.1);
+  
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .username{
+    width: 260px;
+  }
+  .password {
+    width: 260px;
+  }
+  .loginBtn {
+    width: 260px;
+  }
+  .rightGrid {
+    padding: 15px;
+  }
+  
+}
+
+@media only screen and (max-width: 1200px) {
+  .leftGridImg {
+    width: 450px;
+  }
+}

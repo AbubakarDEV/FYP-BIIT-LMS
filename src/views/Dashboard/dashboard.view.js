@@ -61,25 +61,25 @@ export default function DashboardView(props) {
                 {...a11yProps(0)}
               />
               <Tab
-                icon={<PersonPinIcon />}
+                icon={<SupervisedUserCircleIcon />}
                 label="Active Students"
-                {...a11yProps(1)}
+                {...a11yProps(2)}
               />
               <Tab
-                icon={<SupervisedUserCircleIcon />}
+                icon={<PersonPinIcon />}
                 label="Active Teachers"
-                {...a11yProps(2)}
+                {...a11yProps(1)}
               />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <ActiveCourses />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <StudentListing />
+            <ActiveCourses profileID={profileID} />
           </TabPanel>
           <TabPanel value={value} index={2}>
             <TeacherListing />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <StudentListing />
           </TabPanel>
         </Box>
       ) : (

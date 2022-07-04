@@ -8,21 +8,15 @@ import { useRouter } from "next/router";
 import EmailIcon from "@mui/icons-material/Email";
 
 export default function TeacherlistingView(props) {
-  const { teacherListing } = props;
+  const { teacherListing, loading } = props;
   const router = useRouter();
   const classes = useStyles();
 
   const [teacherListings, setTeacherListings] = useState(teacherListing);
-  const [loading, setLoading] = React.useState(false);
+  // const [loading, setLoading] = React.useState(loading);
 
   useEffect(() => {
-    setLoading(true);
-    setTeacherListings(
-      teacherListing.filter(
-        (item) => item?.roles[0]?.shortname == "editingteacher"
-      )
-    );
-    setLoading(false);
+    setTeacherListings(teacherListing);
   }, []);
 
   return (

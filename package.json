@@ -16,6 +16,7 @@
     "@mui/material": "^5.4.3",
     "@mui/styled-engine-sc": "^5.4.2",
     "@mui/styles": "^5.5.0",
+    "@zeit/next-css": "^1.0.1",
     "axios": "^0.26.0",
     "babel-plugin-styled-components": "^2.0.7",
     "bootstrap": "^5.1.3",

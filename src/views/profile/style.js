@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => {
   return {
     profileCnt: {
+      height: "100vh",
       padding: theme.spacing(8, 5),
 
       [theme.breakpoints.down("sm")]: {

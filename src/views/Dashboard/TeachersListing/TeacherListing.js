@@ -5,9 +5,6 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import EmailIcon from "@mui/icons-material/Email";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-import { getAllUserListings } from "../../../common/actions/dashboard";
-import { GETALLENROLLEDUSER } from "../../../common/constants";
 
 export default function TeacherListing(props) {
   const classes = useStyles();
@@ -17,26 +14,10 @@ export default function TeacherListing(props) {
   const [season, setSeason] = React.useState("Spring 2021");
 
   useEffect(() => {
-    // setLoading(true);
-    // const request = {
-    //   wsfunction: GETALLENROLLEDUSER,
-    //   wstoken:
-    //     localStorage.getItem("access_token") || Cookies.get("access_token"),
-    // };
-
-    // getAllUserListings(
-    //   request,
-    //   (res) => {
-    //     setLoading(false);
-    //     setTeachers(res.data.splice(3, 37));
-    //   },
-    //   (err) => {
-    //     setLoading(false);
-    //   }
-    // );
-
     const allusers = JSON.parse(localStorage.getItem("allUsers"));
-    setTeachers(allusers.splice(3, 37));
+    if (allusers.length) {
+      setTeachers(allusers?.splice(3, 37));
+    }
   }, []);
 
   return (
